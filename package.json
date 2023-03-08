@@ -1,6 +1,6 @@
 {
   "name": "updatorio",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "It updates all your mods on the dedicated factorio game server.",
   "main": "src/index.ts",
   "bin": "./index.js",
