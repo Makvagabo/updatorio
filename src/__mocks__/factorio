@@ -1,0 +1,2 @@
+#!/bin/bash
+printf "Version: 1.1.76 (build 60350, linux64, headless)\nBinary version: 64\nMap input version: 0.18.0-0\nMap output version: 1.1.76-0\n"

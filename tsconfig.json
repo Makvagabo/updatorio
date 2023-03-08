@@ -1,0 +1,10 @@
+{
+  "extends": "@tsconfig/node14/tsconfig.json",
+  "compilerOptions": {
+    "resolveJsonModule": true,
+    "types": ["jest"],
+    "outDir": "./.publish",
+    "declaration": true
+  },
+  "include": ["src/**/*.ts"]
+}
