@@ -12,3 +12,4 @@ package-lock.json
 junit.xml
 ./repos/*
 .env
+.npmrc
