@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import fs from "fs";
 import { program } from "commander";
 import { compare, compareVersions, satisfies } from "compare-versions";
