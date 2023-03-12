@@ -3,7 +3,7 @@ export type Options = {
   modsUrl: string;
   downloadModsUrl: string;
   authUrl: string;
-  semiVersions: "path" | "minor" | "major";
+  semiVersions: "patch" | "minor" | "major";
   serverDir: string;
 };
 

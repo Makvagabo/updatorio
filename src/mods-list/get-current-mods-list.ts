@@ -6,9 +6,9 @@ import { MODS_DIR_PATH } from "../constants";
 
 const modsExcludes = ["base"];
 
-export const getCurrentModsList = (modsFiles: string[]) => {
+export const getCurrentModsList = (serverDir: string, modsFiles: string[]) => {
   const { mods } = JSON.parse(
-    fs.readFileSync(path.join(MODS_DIR_PATH, "mod-list.json")).toString()
+    fs.readFileSync(path.join(serverDir, MODS_DIR_PATH, "mod-list.json")).toString()
   ) as ModList;
 
   return mods

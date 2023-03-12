@@ -1,0 +1,19 @@
+{
+  "pagination": {
+    "count": 3,
+    "page": 1,
+    "page_count": 1,
+    "page_size": 25,
+    "links": {
+      "first": null,
+      "next": null,
+      "prev": null,
+      "last": null
+    }
+  },
+  "results": [
+    {
+      "name": "uninstalled-mod"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "pagination": {
+    "count": 3,
+    "page": 1,
+    "page_count": 1,
+    "page_size": 25,
+    "links": {
+      "first": null,
+      "next": null,
+      "prev": null,
+      "last": null
+    }
+  },
+  "results": [
+    {
+      "name": "aai-containers",
+      "title": "AAI Containers & Warehouses",
+      "owner": "Earendel",
+      "summary": "A set of containers in the Factorio style with multiple options for inventory sizes. Chest 1x1, Strongbox 2x2, Storehouse 4x4, and Warehouse 6x6. Logistic and non-logistic variants of all. Container colour uses masks so other mods can modify the tint (for colour blindness etc).",
+      "downloads_count": 272662,
+      "category": "content",
+      "score": 164.56666666666672,
+      "releases": []
+    }
+  ]
+}

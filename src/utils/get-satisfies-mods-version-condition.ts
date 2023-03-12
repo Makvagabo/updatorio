@@ -6,7 +6,7 @@ export const getSatisfiesModsVersionCondition = (
   switch (versions) {
     case "minor":
       return "^";
-    case "path":
+    case "patch":
       return "~";
     default:
       return "";

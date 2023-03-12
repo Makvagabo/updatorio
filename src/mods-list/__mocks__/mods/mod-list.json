@@ -1,0 +1,23 @@
+{
+  "mods": [
+    {
+      "name": "base",
+      "enabled": true
+    },
+
+    {
+      "name": "aai-containers",
+      "enabled": true
+    },
+
+    {
+      "name": "aai-industry",
+      "enabled": true
+    },
+
+    {
+      "name": "aai-signal-transmission",
+      "enabled": false
+    }
+  ]
+}

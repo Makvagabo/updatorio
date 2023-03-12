@@ -1,12 +1,16 @@
-import { program, ParseOptions } from 'commander';
+import { Command, ParseOptions } from 'commander';
 import { validate } from 'compare-versions';
 
 import { getConfig } from '../config';
 import { ProgramOptions } from '../types';
 
+let program: Command;
+
 export const run = (argv?: readonly string[], options?: ParseOptions) => {
   const config = getConfig();
   const { defaultOptions } = config;
+
+  program = new Command();
 
   program
     .name("factorio-mods-updater")
@@ -17,7 +21,7 @@ export const run = (argv?: readonly string[], options?: ParseOptions) => {
     .option(
       "--game-version <value>",
       "server game version",
-      (value) => validate(value) || defaultOptions.gameVersion,
+      (value) => validate(value) ? value : defaultOptions.gameVersion,
       defaultOptions.gameVersion
     )
     .option("--mods-url <value>", `url for getting mod's list`, defaultOptions.modsUrl)
