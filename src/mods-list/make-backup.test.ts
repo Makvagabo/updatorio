@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import JSZip from 'jszip';
+
 import { makeBackup } from './make-backup';
 
 describe('makeBackup', () => {
@@ -33,6 +34,10 @@ describe('makeBackup', () => {
 
   afterEach(() => {
     jest.clearAllMocks();
+  });
+
+  afterAll(() => {
+    jest.resetModules();
   });
 
   it('should create a zip backup of the mods files and delete the original mods directory', () => {

@@ -37,13 +37,18 @@ describe('cli', () => {
   });
 
   it('should have throw error when require options did not pass', async () => {
-    const { run, getOptions } = await import('../cli');
+    const stdoutSpy = jest
+      .spyOn(process.stderr, 'write')
+      .mockImplementation(jest.fn());
+
+    const { run } = await import('../cli');
 
     const mockExit = jest.spyOn(process, 'exit').mockImplementation((number) => {
       throw new Error('process.exit: ' + number);
     });
 
     expect(() => run(['node', 'factorio-mods-updater'])).toThrowError();
+    expect(stdoutSpy).toHaveBeenCalledWith('error: required option \'--username <value>\' not specified\n');
     expect(mockExit).toHaveBeenCalledWith(1);
 
     mockExit.mockRestore();

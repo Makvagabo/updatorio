@@ -57,6 +57,9 @@ describe('getModsAvailableForUpdate', () => {
   });
 
   it('should return the empty list if there was an error', async () => {
+    const consoleSpy = jest
+      .spyOn(console, 'error')
+      .mockImplementation(jest.fn());
     const currentModsList = [
       { name: 'aai-containers', version: '0.2.1' },
       { name: 'aai-industry', version: '0.5.19' },
@@ -72,6 +75,10 @@ describe('getModsAvailableForUpdate', () => {
 
     const result = await getAvailableModsForUpdate(options, currentModsList);
 
+    expect(consoleSpy).toHaveBeenCalledWith(
+      'Error during the getting available mods for update!',
+      { status: 503 }
+    );
     expect(result).toStrictEqual([]);
   });
 
@@ -103,7 +110,7 @@ describe('getModsAvailableForUpdate', () => {
   it('should return the empty list if received mod has a new major game version', async () => {
     const modsReleasesInfoData = await import(
       './__mocks__/mods/mods-releases-info-data-with-new-version-games-mod-200.json'
-      );
+    );
     const currentModsList = [
       { name: 'aai-containers', version: '0.2.1' },
       { name: 'aai-industry', version: '0.5.19' },
@@ -128,7 +135,7 @@ describe('getModsAvailableForUpdate', () => {
   it('should return the empty list if received mods version is not satisfied conditions of semiversion', async () => {
     const modsReleasesInfoData = await import(
       './__mocks__/mods/mods-releases-info-data-with-dismatch-version-mod-200.json'
-      );
+    );
     const currentModsList = [
       { name: 'aai-containers', version: '1.2.1' },
       { name: 'aai-industry', version: '0.5.19' },
@@ -153,7 +160,7 @@ describe('getModsAvailableForUpdate', () => {
   it('should return the empty list if received mods don`t contain releases', async () => {
     const modsReleasesInfoData = await import(
       './__mocks__/mods/mods-releases-info-data-without-releases-200.json'
-      );
+    );
     const currentModsList = [
       { name: 'aai-containers', version: '1.2.1' },
       { name: 'aai-industry', version: '0.5.19' },
