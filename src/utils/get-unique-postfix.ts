@@ -1,8 +1,8 @@
-export function getUniquePostfix() {
-  return new Date()
+export const getUniquePostfix = () =>
+  new Date()
     .toISOString()
-    .substring(0, 19)
-    .replace(/-/g, "")
-    .replace(/:/g, "")
-    .replace("T", ".");
-}
+    .substring(0, 23)
+    .replace(/-/g, '')
+    .replace(/:/g, '')
+    .replace(/\./g, '')
+    .replace('T', '.');

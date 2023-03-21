@@ -5,7 +5,7 @@ import { AvailableModsForUpdate, ProgramOptions } from "../types";
 
 export const downloadMods = async (
   modsAvailableForUpdate: AvailableModsForUpdate,
-  options: ProgramOptions,
+  options: Pick<ProgramOptions, 'downloadModsUrl' | 'username'>,
   authToken: string
 ) => {
   const downloads = modsAvailableForUpdate.map((mod) => {

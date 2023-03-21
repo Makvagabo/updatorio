@@ -5,7 +5,7 @@ import { MODS_DIR_PATH } from '../constants';
 import { getUniquePostfix } from '../utils/get-unique-postfix';
 import { ProgramOptions } from '../types';
 
-export const makeBackup = (modsFiles: string[], options: ProgramOptions) => {
+export const makeBackup = (modsFiles: string[], options: Pick<ProgramOptions, 'serverDir'>) => {
   const zip = new JSZip();
   const modsBackup = zip.folder("mods_backup");
 
@@ -24,5 +24,7 @@ export const makeBackup = (modsFiles: string[], options: ProgramOptions) => {
 
       fs.rmSync(path.join(options.serverDir, `mods`));
       fs.mkdirSync(path.join(options.serverDir, `mods`));
+
+      console.log("Mods folder was removed!");
     });
 }

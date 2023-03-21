@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { ProgramOptions } from '../types';
 
-export const getAuthToken = async (options: ProgramOptions) => {
+export const getAuthToken = async (options: Pick<ProgramOptions, 'authUrl' | 'username' | 'password'>) => {
   try {
     const {
       data: [token],
