@@ -1,17 +1,20 @@
 #!/usr/bin/env node
-import { initConfig } from "./config";
-import { getOptions, run } from "./cli";
+import { initConfig } from './config';
+import { getOptions, run } from './cli';
 import {
   getCurrentModsList,
   getModsFiles,
   getAvailableModsForUpdate,
   makeBackup,
   downloadMods,
-} from "./mods-list";
-import { getAuthToken } from "./utils/get-auth-token";
+} from './mods-list';
+import { getAuthToken } from './utils/get-auth-token';
 import { DEFAULT_OPTIONS, GAME_SERVICE_ADDRESS } from './constants';
 
-initConfig({ gameServiceAddress: GAME_SERVICE_ADDRESS, defaultOptions: DEFAULT_OPTIONS });
+initConfig({
+  gameServiceAddress: GAME_SERVICE_ADDRESS,
+  defaultOptions: DEFAULT_OPTIONS,
+});
 
 run();
 
@@ -40,8 +43,8 @@ async function main() {
 
 main()
   .then(() => {
-    console.log("Mods updated success!");
+    console.log('Mods updated success!');
   })
   .catch((e) => {
-    console.error("Error mods update!", e);
+    console.error('Error mods update!', e);
   });

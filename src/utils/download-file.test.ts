@@ -25,21 +25,62 @@ describe('downloadFile', () => {
     expect(consoleLogSpy).toHaveBeenCalledWith('"file" already exists!');
   });
 
-  it('should download file and resolve', async () => {
+  it('should download file and resolve', (done) => {
     const requestConfig = { url: 'http://example.com/file' };
     const response = { data: { pipe: jest.fn() } };
     mockedAxios.mockResolvedValueOnce(response);
-    fs.createWriteStream = jest.fn().mockReturnValueOnce({ on: jest.fn() });
 
-    downloadFile(requestConfig, outputLocationPath);
+    const mockOnClose = jest.fn();
+    fs.createWriteStream = jest.fn().mockReturnValueOnce({ on: mockOnClose });
 
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    downloadFile(requestConfig, outputLocationPath).then((result) => {
+      expect(axios).toHaveBeenCalledWith({
+        ...requestConfig,
+        responseType: 'stream',
+      });
+      expect(fs.createWriteStream).toHaveBeenCalledWith(outputLocationPath);
 
-    expect(axios).toHaveBeenCalledWith({
-      ...requestConfig,
-      responseType: 'stream',
+      expect(mockOnClose).toHaveBeenCalledTimes(2);
+      expect(mockOnClose).toHaveBeenCalledWith('error', expect.any(Function));
+      expect(mockOnClose).toHaveBeenCalledWith('close', expect.any(Function));
+
+      expect(response.data.pipe).toHaveBeenCalledWith(expect.anything());
+      expect(result).toBe(true);
+
+      done();
     });
-    expect(fs.createWriteStream).toHaveBeenCalledWith(outputLocationPath);
-    expect(response.data.pipe).toHaveBeenCalledWith(expect.anything());
+
+    setTimeout(() => mockOnClose.mock.calls[1][1](), 0);
+  });
+
+  it('should reject if error occur', (done) => {
+    const requestConfig = { url: 'http://example.com/file' };
+    const response = { data: { pipe: jest.fn() } };
+    mockedAxios.mockResolvedValueOnce(response);
+
+    const mockOnClose = jest.fn();
+    const mockWriterClose = jest.fn();
+    const error = new Error('Disconnect');
+    fs.createWriteStream = jest.fn().mockReturnValueOnce({ on: mockOnClose, close: mockWriterClose });
+
+    downloadFile(requestConfig, outputLocationPath).catch((e) => {
+      expect(axios).toHaveBeenCalledWith({
+        ...requestConfig,
+        responseType: 'stream',
+      });
+      expect(fs.createWriteStream).toHaveBeenCalledWith(outputLocationPath);
+
+      expect(mockOnClose).toHaveBeenCalledTimes(2);
+      expect(mockOnClose).toHaveBeenCalledWith('error', expect.any(Function));
+      expect(mockOnClose).toHaveBeenCalledWith('close', expect.any(Function));
+
+      expect(response.data.pipe).toHaveBeenCalledWith(expect.anything());
+      expect(mockWriterClose).toHaveBeenCalled();
+      expect(e).toBe(error);
+
+      done();
+    });
+
+    setTimeout(() => mockOnClose.mock.calls[0][1](error), 0);
   });
 });
