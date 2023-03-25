@@ -14,7 +14,7 @@ export const initConfig = (initialConfig: Omit<Config, 'version'>) => {
   const { gameServiceAddress = 'factorio.com' } = initialConfig;
 
   const packageInfo = JSON.parse(
-    fs.readFileSync(path.resolve('./package.json')).toString()
+    fs.readFileSync(path.join(__dirname, 'package.json')).toString()
   );
   const factorioServerBinFile = path.join(
     options.serverDir,
