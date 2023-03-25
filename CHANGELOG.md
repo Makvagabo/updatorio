@@ -1,5 +1,12 @@
 
 
+# [0.6.0-beta.1](https://github.com/Makvagabo/updatorio/compare/v0.6.0-beta.0...v0.6.0-beta.1) (2023-03-25)
+
+
+### Bug Fixes
+
+* **config:** change path to package.json ([fc38258](https://github.com/Makvagabo/updatorio/commit/fc38258866bc35a47a0e8fc02f76971f2e6f0c32))
+
 # [0.6.0-beta.0](https://github.com/Makvagabo/updatorio/compare/v0.5.0...v0.6.0-beta.0) (2023-03-25)
 
 
