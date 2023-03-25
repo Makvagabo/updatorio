@@ -24,6 +24,7 @@
     "jszip": "^3.10.1"
   },
   "devDependencies": {
+    "@release-it/conventional-changelog": "^5.1.1",
     "@tsconfig/node14": "^1.0.3",
     "@types/jest": "^29.4.0",
     "@types/node": "14",
@@ -46,14 +47,31 @@
     }
   },
   "release-it": {
+    "npm": {
+      "publishPath": "./.publish",
+      "skipChecks": true
+    },
     "git": {
-      "commitMessage": "chore: release v${version}"
+      "commitMessage": "chore: release v${version}",
+      "push": true,
+      "pushArgs": [
+        "--follow-tags"
+      ]
     },
     "github": {
       "release": true
     },
     "hooks": {
-      "before:release": ["yarn test"]
+      "before:release": [
+        "yarn test",
+        "yarn build"
+      ]
+    },
+    "plugins": {
+      "@release-it/conventional-changelog": {
+        "infile": "CHANGELOG.md",
+        "preset": "angular"
+      }
     }
   }
 }
