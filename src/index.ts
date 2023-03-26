@@ -34,7 +34,7 @@ async function main() {
     return;
   }
 
-  makeBackup(modsFiles, options);
+  await makeBackup(modsFiles, options);
 
   const authToken = await getAuthToken(options);
 

@@ -15,13 +15,15 @@ describe('makeBackup', () => {
     file: jest.fn(),
   };
 
-  const mockJSZipGenerateNodeStreamPipe: any = {
+  const mockJSZipGenerateNodeStreamOn: any = {
     on: jest.fn(),
+  };
+  const mockJSZipGenerateNodeStreamPipe: any = {
+    on: jest.fn(() => mockJSZipGenerateNodeStreamOn),
   };
   const mockJSZipGenerateNodeStream: any = {
     pipe: jest.fn(() => mockJSZipGenerateNodeStreamPipe),
   };
-
 
   beforeAll(() => {
     jest.spyOn(fs, 'createWriteStream').mockImplementation(jest.fn());
@@ -29,7 +31,9 @@ describe('makeBackup', () => {
     jest.spyOn(fs, 'rmSync').mockImplementation(jest.fn());
     jest.spyOn(fs, 'mkdirSync').mockImplementation(jest.fn());
     jest.spyOn(JSZip.prototype, 'folder').mockReturnValue(mockJSZipFolder);
-    jest.spyOn(JSZip.prototype, 'generateNodeStream').mockReturnValue(mockJSZipGenerateNodeStream);
+    jest
+      .spyOn(JSZip.prototype, 'generateNodeStream')
+      .mockReturnValue(mockJSZipGenerateNodeStream);
   });
 
   afterEach(() => {
@@ -40,7 +44,7 @@ describe('makeBackup', () => {
     jest.resetModules();
   });
 
-  it('should create a zip backup of the mods files and delete the original mods directory', () => {
+  it('should create a zip backup of the mods files and delete the original mods directory', async () => {
     const consoleSpy = jest.spyOn(console, 'log').mockImplementation(jest.fn());
 
     makeBackup(modsFiles, options);
@@ -53,14 +57,28 @@ describe('makeBackup', () => {
     });
     expect(mockJSZipGenerateNodeStream.pipe).toHaveBeenCalledTimes(1);
 
-    expect(fs.createWriteStream).toHaveBeenCalledWith(expect.stringMatching(/^mods_backup_\d+\.\d+\.zip$/));
-    expect(mockJSZipGenerateNodeStreamPipe.on).toHaveBeenCalledWith('finish', expect.any(Function));
+    expect(fs.createWriteStream).toHaveBeenCalledWith(
+      expect.stringMatching(/^mods_backup_\d+\.\d+\.zip$/)
+    );
+    expect(mockJSZipGenerateNodeStreamPipe.on).toHaveBeenCalledWith(
+      'finish',
+      expect.any(Function)
+    );
+    expect(mockJSZipGenerateNodeStreamOn.on).toHaveBeenCalledWith(
+      'error',
+      expect.any(Function)
+    );
+
+    await new Promise((res) => setTimeout(() => res(true), 100));
 
     mockJSZipGenerateNodeStreamPipe.on.mock.calls[0][1]();
 
-    expect(consoleSpy).toHaveBeenCalledWith('Backup of mods was created success!');
+    expect(consoleSpy).toHaveBeenCalledWith(
+      'Backup of mods was created success!'
+    );
     expect(fs.rmSync).toHaveBeenCalledWith(
-      path.join(options.serverDir, 'mods')
+      path.join(options.serverDir, 'mods'),
+      { force: true, recursive: true }
     );
     expect(fs.mkdirSync).toHaveBeenCalledWith(
       path.join(options.serverDir, 'mods')
@@ -68,13 +86,29 @@ describe('makeBackup', () => {
     expect(consoleSpy).toHaveBeenCalledWith('Mods folder was removed!');
   });
 
+  it('should log an error message and reject if there is an error in the deleting original mods directory and creating new once', async () => {
+    const consoleSpy = jest
+      .spyOn(console, 'error')
+      .mockImplementation(jest.fn());
+
+    makeBackup(modsFiles, options);
+
+    await new Promise((res) => setTimeout(() => res(true), 100));
+
+    mockJSZipGenerateNodeStreamOn.on.mock.calls[0][1]();
+
+    expect(consoleSpy).toHaveBeenCalledWith(
+      'An error has occurred in the removing mods folder process!'
+    );
+  });
+
   it('should log an error message if there is an error in creating the backup', () => {
+    const error = new Error('Error creating backup!')
     jest.spyOn(JSZip.prototype, 'generateNodeStream').mockImplementation(() => {
-      throw new Error('Error creating backup');
+      throw error;
     });
 
-    expect(() => makeBackup(modsFiles, options)).toThrowError(
-      'Error creating backup'
-    );
+
+    return expect(makeBackup(modsFiles, options)).rejects.toEqual(error);
   });
 });

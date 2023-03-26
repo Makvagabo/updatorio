@@ -16,15 +16,23 @@ export const makeBackup = (modsFiles: string[], options: Pick<ProgramOptions, 's
     modsBackup?.file(file, filesData);
   });
 
-  zip
-    .generateNodeStream({ type: "nodebuffer", streamFiles: true })
-    .pipe(fs.createWriteStream(`mods_backup_${getUniquePostfix()}.zip`))
-    .on("finish", function () {
-      console.log("Backup of mods was created success!");
+  return new Promise((resolve, reject) => {
+    const a = zip
+      .generateNodeStream({ type: "nodebuffer", streamFiles: true })
+      .pipe(fs.createWriteStream(`mods_backup_${getUniquePostfix()}.zip`));
 
-      fs.rmSync(path.join(options.serverDir, `mods`));
-      fs.mkdirSync(path.join(options.serverDir, `mods`));
+      a.on("finish", () => {
+        console.log("Backup of mods was created success!");
 
-      console.log("Mods folder was removed!");
-    });
+        fs.rmSync(path.join(options.serverDir, `mods`), { recursive: true, force: true });
+        fs.mkdirSync(path.join(options.serverDir, `mods`));
+
+        console.log("Mods folder was removed!");
+        resolve(true);
+      })
+      .on("error", (error) => {
+        console.error("An error has occurred in the removing mods folder process!");
+        reject(error);
+      });
+  });
 }
