@@ -1,15 +1,8 @@
 #!/usr/bin/env node
 import { initConfig } from './config';
-import { getOptions, run } from './cli';
-import {
-  getCurrentModsList,
-  getModsFiles,
-  getAvailableModsForUpdate,
-  makeBackup,
-  downloadMods,
-} from './mods-list';
-import { getAuthToken } from './utils/get-auth-token';
+import { run } from './cli';
 import { DEFAULT_OPTIONS, GAME_SERVICE_ADDRESS } from './constants';
+import { main } from './main';
 
 initConfig({
   gameServiceAddress: GAME_SERVICE_ADDRESS,
@@ -18,32 +11,9 @@ initConfig({
 
 run();
 
-async function main() {
-  const options = getOptions();
-
-  const modsFiles = getModsFiles(options.serverDir);
-
-  const currentModsList = getCurrentModsList(options.serverDir, modsFiles);
-
-  const modsAvailableForUpdate = await getAvailableModsForUpdate(
-    options,
-    currentModsList
-  );
-
-  if (modsAvailableForUpdate.length === 0) {
-    return;
-  }
-
-  await makeBackup(modsFiles, options);
-
-  const authToken = await getAuthToken(options);
-
-  await downloadMods(modsAvailableForUpdate, options, authToken);
-}
-
 main()
-  .then(() => {
-    console.log('Mods updated success!');
+  .then((message) => {
+    console.log(message || 'Mods updated success!');
   })
   .catch((e) => {
     console.error('Error mods update!', e);
