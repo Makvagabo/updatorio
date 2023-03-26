@@ -1,5 +1,18 @@
 
 
+# [0.6.0-beta.2](https://github.com/Makvagabo/updatorio/compare/v0.6.0-beta.1...v0.6.0-beta.2) (2023-03-26)
+
+
+### Bug Fixes
+
+* **deps:** remove redundant module ([808a5c9](https://github.com/Makvagabo/updatorio/commit/808a5c90a05652006e878de9dc39d51e134ccf4c))
+* **make-backup:** add promise in handlers of zip ([c7a42d3](https://github.com/Makvagabo/updatorio/commit/c7a42d31e6c0b1f8c2665370d14dceaab0a00406))
+
+
+### Features
+
+* add integration tests ([c40a79c](https://github.com/Makvagabo/updatorio/commit/c40a79c536e8983d7609002406fb72cf5247476c))
+
 # [0.6.0-beta.1](https://github.com/Makvagabo/updatorio/compare/v0.6.0-beta.0...v0.6.0-beta.1) (2023-03-25)
 
 
