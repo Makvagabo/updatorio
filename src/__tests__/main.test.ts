@@ -6,7 +6,8 @@ import {
   getCurrentModsList,
   getModsFiles,
   makeBackup,
-} from '../mods-list';
+  removeMods,
+} from '../mods-tools';
 import { main } from '../main';
 import {
   mockAuthToken,
@@ -16,12 +17,13 @@ import {
   mockOptions,
 } from '../__mocks__/main';
 
-jest.mock('../mods-list', () => ({
+jest.mock('../mods-tools', () => ({
   getModsFiles: jest.fn(() => mockModsFiles),
   getCurrentModsList: jest.fn(() => mockCurrentModsList),
   getAvailableModsForUpdate: jest.fn(async () => mockAvailableModsForUpdate),
   makeBackup: jest.fn(async () => true),
-  downloadMods: jest.fn(async () => true),
+  downloadMods: jest.fn(async () => {}),
+  removeMods: jest.fn(),
 }));
 
 jest.mock('../config', () => ({
@@ -72,6 +74,9 @@ describe('index', () => {
     expect(makeBackup).toHaveBeenCalledWith(mockModsFiles, mockOptions);
     await new Promise((res) => setTimeout(() => res(true), 0));
 
+    expect(removeMods).toHaveBeenCalledTimes(1);
+    expect(removeMods).toHaveBeenCalledWith(mockCurrentModsList, mockAvailableModsForUpdate, mockOptions);
+
     expect(getAuthToken).toHaveBeenCalledTimes(1);
     expect(getAuthToken).toHaveBeenCalledWith(mockOptions);
     await new Promise((res) => setTimeout(() => res(true), 0));
@@ -95,6 +100,8 @@ describe('index', () => {
     await new Promise((res) => setTimeout(() => res(true), 0));
 
     expect(makeBackup).toHaveBeenCalledTimes(0);
+
+    expect(removeMods).toHaveBeenCalledTimes(0);
 
     expect(getAuthToken).toHaveBeenCalledTimes(0);
 

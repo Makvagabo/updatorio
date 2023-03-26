@@ -2,6 +2,7 @@ describe('getCurrentModsList', () => {
   beforeAll(() => {
     jest.mock('../constants', () => ({
       MODS_DIR_PATH: '/__mocks__/mods',
+      MOD_VERSION_SEPARATOR: '_',
     }));
   });
 

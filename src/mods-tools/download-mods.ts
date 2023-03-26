@@ -1,7 +1,8 @@
-import { downloadFile } from "../utils/download-file";
-import path from "path";
-import { MODS_DIR_PATH } from "../constants";
-import { AvailableModsForUpdate, ProgramOptions } from "../types";
+import path from 'path';
+
+import { downloadFile } from '../utils/download-file';
+import { MODS_DIR_PATH } from '../constants';
+import { AvailableModsForUpdate, ProgramOptions } from '../types';
 
 export const downloadMods = async (
   modsAvailableForUpdate: AvailableModsForUpdate,
@@ -16,7 +17,7 @@ export const downloadMods = async (
     return downloadFile(
       {
         baseURL: options.downloadModsUrl,
-        method: "GET",
+        method: 'GET',
         url: download_url,
         params: { username: options.username, authToken },
       },
@@ -27,6 +28,6 @@ export const downloadMods = async (
   try {
     await Promise.all(downloads);
   } catch (e) {
-    console.error("Download mods error!", e);
+    console.error('Download mods error!', e);
   }
 };

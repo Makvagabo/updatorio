@@ -1,14 +1,16 @@
-import path from "path";
-import fs from "fs";
+import path from 'path';
+import fs from 'fs';
 
-import { ModList, ParsedModList } from "../types";
-import { MODS_DIR_PATH } from "../constants";
+import { ModList, ParsedModList } from '../types';
+import { MOD_VERSION_SEPARATOR, MODS_DIR_PATH } from '../constants';
 
-const modsExcludes = ["base"];
+const modsExcludes = ['base'];
 
 export const getCurrentModsList = (serverDir: string, modsFiles: string[]) => {
   const { mods } = JSON.parse(
-    fs.readFileSync(path.join(serverDir, MODS_DIR_PATH, "mod-list.json")).toString()
+    fs
+      .readFileSync(path.join(serverDir, MODS_DIR_PATH, 'mod-list.json'))
+      .toString()
   ) as ModList;
 
   return mods
@@ -21,7 +23,10 @@ export const getCurrentModsList = (serverDir: string, modsFiles: string[]) => {
         return acc;
       }
 
-      const currentModVersion = path.parse(modPath).name.split("_").pop();
+      const currentModVersion = path
+        .parse(modPath)
+        .name.split(MOD_VERSION_SEPARATOR)
+        .pop();
 
       if (!currentModVersion) {
         return acc;

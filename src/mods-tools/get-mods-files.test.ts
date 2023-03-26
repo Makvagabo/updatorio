@@ -1,9 +1,12 @@
+import { MOD_EXTENSION } from '../constants';
 
 
 describe('getModsFiles', () => {
   beforeAll(() => {
     jest.mock('../constants', () => ({
       MODS_DIR_PATH: '/__mocks__/mods',
+      MOD_VERSION_SEPARATOR: '_',
+      MOD_EXTENSION: '.zip',
     }));
   });
 

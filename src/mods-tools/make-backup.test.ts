@@ -28,8 +28,6 @@ describe('makeBackup', () => {
   beforeAll(() => {
     jest.spyOn(fs, 'createWriteStream').mockImplementation(jest.fn());
     jest.spyOn(fs, 'readFileSync').mockReturnValue(Buffer.from('content'));
-    jest.spyOn(fs, 'rmSync').mockImplementation(jest.fn());
-    jest.spyOn(fs, 'mkdirSync').mockImplementation(jest.fn());
     jest.spyOn(JSZip.prototype, 'folder').mockReturnValue(mockJSZipFolder);
     jest
       .spyOn(JSZip.prototype, 'generateNodeStream')
@@ -44,7 +42,7 @@ describe('makeBackup', () => {
     jest.resetModules();
   });
 
-  it('should create a zip backup of the mods files and delete the original mods directory', async () => {
+  it('should create a zip backup of the mods files', async () => {
     const consoleSpy = jest.spyOn(console, 'log').mockImplementation(jest.fn());
 
     makeBackup(modsFiles, options);
@@ -76,17 +74,9 @@ describe('makeBackup', () => {
     expect(consoleSpy).toHaveBeenCalledWith(
       'Backup of mods was created success!'
     );
-    expect(fs.rmSync).toHaveBeenCalledWith(
-      path.join(options.serverDir, 'mods'),
-      { force: true, recursive: true }
-    );
-    expect(fs.mkdirSync).toHaveBeenCalledWith(
-      path.join(options.serverDir, 'mods')
-    );
-    expect(consoleSpy).toHaveBeenCalledWith('Mods folder was removed!');
   });
 
-  it('should log an error message and reject if there is an error in the deleting original mods directory and creating new once', async () => {
+  it('should log an error message and reject if there is an error in the archiving process', async () => {
     const consoleSpy = jest
       .spyOn(console, 'error')
       .mockImplementation(jest.fn());
@@ -98,7 +88,7 @@ describe('makeBackup', () => {
     mockJSZipGenerateNodeStreamOn.on.mock.calls[0][1]();
 
     expect(consoleSpy).toHaveBeenCalledWith(
-      'An error has occurred in the removing mods folder process!'
+      'An error has occurred in the backuping mods process!'
     );
   });
 

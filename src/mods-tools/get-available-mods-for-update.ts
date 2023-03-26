@@ -24,6 +24,7 @@ export const getAvailableModsForUpdate = async (options: Pick<ProgramOptions, 'm
         return acc;
       }
 
+      // TODO: for 0.*.* use path comparison
       const availableVersionForUpdate = mod?.releases
         .filter((release) => {
           const isGameVersionSatisfied = satisfies(
