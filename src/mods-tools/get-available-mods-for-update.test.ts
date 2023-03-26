@@ -56,6 +56,45 @@ describe('getModsAvailableForUpdate', () => {
     ]);
   });
 
+  it('should return new beta mod if you want to update it', async () => {
+    const modsReleasesInfoData = await import(
+      './__mocks__/mods/mods-releases-info-data-with-beta-200.json'
+      );
+    const currentModsList = [
+      { name: 'aai-containers', version: '0.1.0' },
+    ];
+    const options = {
+      modsUrl: 'https://mods.com',
+      semiVersions: 'beta' as const,
+      gameVersion: '1.70',
+    };
+
+    mockedAxios.mockResolvedValueOnce({
+      status: 200,
+      data: modsReleasesInfoData,
+    });
+
+    const result = await getAvailableModsForUpdate(options, currentModsList);
+
+    expect(result).toStrictEqual([
+      {
+        name: 'aai-containers',
+        availableVersionForUpdate: {
+          download_url: '/download/aai-containers/62bce7638ed1b6ac27b67aaa',
+          file_name: 'aai-containers_0.3.0.zip',
+          info_json: {
+            factorio_version: '1.1',
+          },
+          released_at: '2022-06-29T23:59:31.508000Z',
+          version: '0.3.0',
+          sha1: 'ba3635dfe00f34307aace6f3f0e80c747207e4f0',
+        },
+      },
+    ]);
+  });
+
+  // TODO: add more positive test cases
+
   it('should return the empty list if there was an error', async () => {
     const consoleSpy = jest
       .spyOn(console, 'error')

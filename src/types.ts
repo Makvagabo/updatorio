@@ -3,9 +3,11 @@ export type Options = {
   modsUrl: string;
   downloadModsUrl: string;
   authUrl: string;
-  semiVersions: "patch" | "minor" | "major";
+  semiVersions: 'beta' | 'patch' | 'minor' | 'major';
   serverDir: string;
 };
+
+export type SatisfiesModsVersionCondition = '^' | '~' | '';
 
 export type Credentials = {
   username: string;
@@ -50,5 +52,5 @@ export type ModsReleasesInfoData = {
 
 export type AvailableModsForUpdate = Array<{
   name: string;
-  availableVersionForUpdate: ModsReleasesInfoData["results"][number]["releases"][number];
+  availableVersionForUpdate: ModsReleasesInfoData['results'][number]['releases'][number];
 }>;
