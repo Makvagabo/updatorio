@@ -1,5 +1,17 @@
 
 
+# [0.6.0-beta.3](https://github.com/Makvagabo/updatorio/compare/v0.6.0-beta.2...v0.6.0-beta.3) (2023-03-26)
+
+
+### Bug Fixes
+
+* **make-backup:** refactor ([c365879](https://github.com/Makvagabo/updatorio/commit/c3658791022d914041bb00b344bfb047fb55ddfa))
+
+
+### Features
+
+* **get-available-mods-for-update:** add condition for beta version of mods ([e273c77](https://github.com/Makvagabo/updatorio/commit/e273c77b935abbb1f63770553045bb56b6416649))
+
 # [0.6.0-beta.2](https://github.com/Makvagabo/updatorio/compare/v0.6.0-beta.1...v0.6.0-beta.2) (2023-03-26)
 
 
