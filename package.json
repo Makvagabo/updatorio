@@ -7,7 +7,6 @@
   "license": "MIT",
   "scripts": {
     "build": "NODE_ENV=production node esbuild.mjs",
-    "start": "node esbuild.mjs && node .publish/index.js",
     "test": "jest --collect-coverage --detectOpenHandles",
     "release:beta": "release-it --ci minor --preRelease=beta"
   },
