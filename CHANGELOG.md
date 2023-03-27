@@ -1,5 +1,12 @@
 
 
+# [0.6.0-beta.6](https://github.com/Makvagabo/updatorio/compare/v0.6.0-beta.5...v0.6.0-beta.6) (2023-03-27)
+
+
+### Features
+
+* add custom http agent for axios requests ([bee2e73](https://github.com/Makvagabo/updatorio/commit/bee2e7394bec48b112f26a1d087032a384547109))
+
 # [0.6.0-beta.5](https://github.com/Makvagabo/updatorio/compare/v0.6.0-beta.4...v0.6.0-beta.5) (2023-03-27)
 
 
