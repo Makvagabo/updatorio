@@ -26,8 +26,8 @@ export const getAuthToken = async (
 
     return token;
   } catch (e) {
-    console.error('Get auth token error!', e);
+    console.error('Get auth token error!');
 
-    return '';
+    throw e;
   }
 };

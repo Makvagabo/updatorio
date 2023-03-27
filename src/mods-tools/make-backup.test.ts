@@ -92,13 +92,12 @@ describe('makeBackup', () => {
     );
   });
 
-  it('should log an error message if there is an error in creating the backup', () => {
+  it('should log an error message if there is an error in creating the backup', async () => {
     const error = new Error('Error creating backup!')
     jest.spyOn(JSZip.prototype, 'generateNodeStream').mockImplementation(() => {
       throw error;
     });
 
-
-    return expect(makeBackup(modsFiles, options)).rejects.toEqual(error);
+    await expect(makeBackup(modsFiles, options)).rejects.toThrow(error);
   });
 });

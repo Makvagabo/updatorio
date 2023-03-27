@@ -39,13 +39,8 @@ describe('getAuthToken', () => {
 
     mockedAxios.mockRejectedValueOnce(error);
 
-    const result = await getAuthToken({ authUrl, username, password });
+    await expect(getAuthToken({ authUrl, username, password })).rejects.toThrow(error);
 
-    expect(result).toBe('');
-    expect(mockedAxios).toHaveBeenCalledTimes(1);
-    expect(consoleErrorSpy).toHaveBeenCalledWith(
-      'Get auth token error!',
-      error
-    );
+    expect(consoleErrorSpy).toHaveBeenCalledWith('Get auth token error!');
   });
 });

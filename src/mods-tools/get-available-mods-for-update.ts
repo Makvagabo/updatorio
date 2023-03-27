@@ -86,8 +86,8 @@ export const getAvailableModsForUpdate = async (
       []
     );
   } catch (e) {
-    console.error('Error during the getting available mods for update!', e);
+    console.error('Error during the getting available mods for update!');
 
-    return [];
+    throw e;
   }
 };

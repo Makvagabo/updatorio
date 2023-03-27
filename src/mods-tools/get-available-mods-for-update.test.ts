@@ -63,10 +63,8 @@ describe('getModsAvailableForUpdate', () => {
   it('should return new beta mod if you want to update it', async () => {
     const modsReleasesInfoData = await import(
       './__mocks__/mods/mods-releases-info-data-with-beta-200.json'
-      );
-    const currentModsList = [
-      { name: 'aai-containers', version: '0.1.0' },
-    ];
+    );
+    const currentModsList = [{ name: 'aai-containers', version: '0.1.0' }];
     const options = {
       modsUrl: 'https://mods.com',
       semiVersions: 'beta' as const,
@@ -97,9 +95,7 @@ describe('getModsAvailableForUpdate', () => {
     ]);
   });
 
-  // TODO: add more positive test cases
-
-  it('should return the empty list if there was an error', async () => {
+  it('should reject and log message if there was an error', async () => {
     const consoleSpy = jest
       .spyOn(console, 'error')
       .mockImplementation(jest.fn());
@@ -116,13 +112,12 @@ describe('getModsAvailableForUpdate', () => {
 
     mockedAxios.mockRejectedValueOnce({ status: 503 });
 
-    const result = await getAvailableModsForUpdate(options, currentModsList);
-
+    await expect(
+      getAvailableModsForUpdate(options, currentModsList)
+    ).rejects.toEqual({ status: 503 });
     expect(consoleSpy).toHaveBeenCalledWith(
-      'Error during the getting available mods for update!',
-      { status: 503 }
+      'Error during the getting available mods for update!'
     );
-    expect(result).toStrictEqual([]);
   });
 
   it('should return the empty list if received mod is uninstalled', async () => {
