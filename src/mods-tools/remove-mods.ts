@@ -11,7 +11,7 @@ export const removeMods = (
 ) => {
   currentModsList
     .filter((currentMod) =>
-      modsAvailableForUpdate.find(
+      modsAvailableForUpdate.filter(
         (availableModForUpdate) =>
           availableModForUpdate.name === currentMod.name
       )

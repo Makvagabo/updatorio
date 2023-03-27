@@ -13,3 +13,4 @@ junit.xml
 ./repos/*
 .env
 .npmrc
+/__test-env__
