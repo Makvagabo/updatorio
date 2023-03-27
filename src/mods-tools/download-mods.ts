@@ -4,6 +4,10 @@ import { downloadFile } from '../utils/download-file';
 import { MODS_DIR_PATH } from '../constants';
 import { AvailableModsForUpdate, ProgramOptions } from '../types';
 
+/**
+ * Download mods available for update
+ * For more information look at https://wiki.factorio.com/Mod_portal_API#Downloading_Mods
+ */
 export const downloadMods = async (
   modsAvailableForUpdate: AvailableModsForUpdate,
   options: Pick<ProgramOptions, 'downloadModsUrl' | 'username'>,
@@ -19,7 +23,7 @@ export const downloadMods = async (
         baseURL: options.downloadModsUrl,
         method: 'GET',
         url: download_url,
-        params: { username: options.username, authToken },
+        params: { username: options.username, token: authToken },
       },
       path.join(MODS_DIR_PATH, `${file_name}`)
     );
