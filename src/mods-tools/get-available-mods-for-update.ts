@@ -3,25 +3,28 @@ import { compare, compareVersions, satisfies } from 'compare-versions';
 
 import {
   AvailableModsForUpdate,
-  ModsReleasesInfoData, Options,
+  ModsReleasesInfoData,
   ParsedModList,
-  ProgramOptions, SatisfiesModsVersionCondition
+  ProgramOptions,
 } from '../types';
 import { getSatisfiesModsVersionCondition } from '../utils/get-satisfies-mods-version-condition';
 import { modifySatisfiesModsVersionCondition } from '../utils/modify-satisfies-mods-version-conditio';
+import { axiosConfigExtender } from '../utils/axios-config-extender';
 
 export const getAvailableModsForUpdate = async (
   options: Pick<ProgramOptions, 'modsUrl' | 'semiVersions' | 'gameVersion'>,
   currentModsList: ParsedModList
 ) => {
   try {
-    const modsReleasesInfo = await axios<ModsReleasesInfoData>({
-      url: options.modsUrl,
-      method: 'GET',
-      params: {
-        namelist: currentModsList.map((mod) => mod.name).join(','),
-      },
-    });
+    const modsReleasesInfo = await axios<ModsReleasesInfoData>(
+      axiosConfigExtender({
+        url: options.modsUrl,
+        method: 'GET',
+        params: {
+          namelist: currentModsList.map((mod) => mod.name).join(','),
+        },
+      })
+    );
 
     let satisfiesModsVersionCondition = getSatisfiesModsVersionCondition(
       options.semiVersions
@@ -40,7 +43,11 @@ export const getAvailableModsForUpdate = async (
         const availableVersionForUpdate = mod?.releases
           .filter((release) => {
             if (options.semiVersions === 'beta') {
-              satisfiesModsVersionCondition = modifySatisfiesModsVersionCondition(release.version, satisfiesModsVersionCondition)
+              satisfiesModsVersionCondition =
+                modifySatisfiesModsVersionCondition(
+                  release.version,
+                  satisfiesModsVersionCondition
+                );
             }
 
             const isGameVersionSatisfied = satisfies(

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { getAuthToken } from './get-auth-token';
+import https from 'https';
 
 jest.mock('axios');
 
@@ -28,6 +29,7 @@ describe('getAuthToken', () => {
       url: authUrl,
       method: 'POST',
       params: expectedRequestBody,
+      httpAgent: expect.any(https.Agent),
     });
   });
 

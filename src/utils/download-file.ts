@@ -2,7 +2,12 @@ import fs from 'fs';
 import path from 'path';
 import axios, { AxiosRequestConfig } from 'axios';
 
-export async function downloadFile(requestConfig: AxiosRequestConfig, outputLocationPath: string) {
+import { axiosConfigExtender } from './axios-config-extender';
+
+export async function downloadFile(
+  requestConfig: AxiosRequestConfig,
+  outputLocationPath: string
+) {
   if (fs.existsSync(outputLocationPath)) {
     console.log(`"${path.basename(outputLocationPath)}" already exists!`);
 
@@ -10,23 +15,25 @@ export async function downloadFile(requestConfig: AxiosRequestConfig, outputLoca
   }
   const writer = fs.createWriteStream(outputLocationPath);
 
-  const response = await axios({
-    ...requestConfig,
-    responseType: "stream",
-  });
+  const response = await axios(
+    axiosConfigExtender({
+      ...requestConfig,
+      responseType: 'stream',
+    })
+  );
 
   response.data.pipe(writer);
 
   return new Promise((resolve, reject) => {
     let error: null | Error = null;
 
-    writer.on("error", (err) => {
+    writer.on('error', (err) => {
       error = err;
       writer.close();
       reject(err);
     });
 
-    writer.on("close", () => {
+    writer.on('close', () => {
       if (!error) {
         resolve(true);
       }

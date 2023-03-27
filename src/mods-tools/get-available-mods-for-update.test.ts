@@ -1,7 +1,10 @@
-import { getAvailableModsForUpdate } from './get-available-mods-for-update';
 import axios from 'axios';
+import https from 'https';
+
+import { getAvailableModsForUpdate } from './get-available-mods-for-update';
 
 jest.mock('axios');
+
 const mockedAxios = axios as jest.MockedFunction<typeof axios>;
 
 describe('getModsAvailableForUpdate', () => {
@@ -38,6 +41,7 @@ describe('getModsAvailableForUpdate', () => {
       params: {
         namelist: 'aai-containers,aai-industry,aai-signal-transmission',
       },
+      httpAgent: expect.any(https.Agent),
     });
     expect(result).toStrictEqual([
       {
