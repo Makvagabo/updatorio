@@ -1,5 +1,18 @@
 
 
+# [0.6.0-beta.4](https://github.com/Makvagabo/updatorio/compare/v0.6.0-beta.3...v0.6.0-beta.4) (2023-03-27)
+
+
+### Bug Fixes
+
+* **cli:** add missed option ([75800ed](https://github.com/Makvagabo/updatorio/commit/75800ed2fac7285eb66e189f0d1ce70ee805e6d9))
+
+
+### Features
+
+* **readme:** add todo list ([7efe895](https://github.com/Makvagabo/updatorio/commit/7efe895c6506fa38cf3f6de2cbdf70bf4552dcc1))
+* update tests for cli and remove-mods ([c6b30c9](https://github.com/Makvagabo/updatorio/commit/c6b30c946e77748c4f6391de65eba00e213a1aca))
+
 # [0.6.0-beta.3](https://github.com/Makvagabo/updatorio/compare/v0.6.0-beta.2...v0.6.0-beta.3) (2023-03-26)
 
 
