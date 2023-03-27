@@ -37,7 +37,7 @@ describe('downloadFile', () => {
     downloadFile(requestConfig, outputLocationPath).then((result) => {
       expect(axios).toHaveBeenCalledWith({
         ...requestConfig,
-        httpAgent: expect.any(https.Agent),
+        httpsAgent: expect.any(https.Agent),
         responseType: 'stream',
       });
       expect(fs.createWriteStream).toHaveBeenCalledWith(outputLocationPath);
@@ -68,7 +68,7 @@ describe('downloadFile', () => {
     downloadFile(requestConfig, outputLocationPath).catch((e) => {
       expect(axios).toHaveBeenCalledWith({
         ...requestConfig,
-        httpAgent: expect.any(https.Agent),
+        httpsAgent: expect.any(https.Agent),
         responseType: 'stream',
       });
       expect(fs.createWriteStream).toHaveBeenCalledWith(outputLocationPath);

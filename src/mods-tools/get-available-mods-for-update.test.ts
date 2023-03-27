@@ -41,7 +41,7 @@ describe('getModsAvailableForUpdate', () => {
       params: {
         namelist: 'aai-containers,aai-industry,aai-signal-transmission',
       },
-      httpAgent: expect.any(https.Agent),
+      httpsAgent: expect.any(https.Agent),
     });
     expect(result).toStrictEqual([
       {

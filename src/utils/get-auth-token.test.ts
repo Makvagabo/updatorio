@@ -29,7 +29,7 @@ describe('getAuthToken', () => {
       url: authUrl,
       method: 'POST',
       params: expectedRequestBody,
-      httpAgent: expect.any(https.Agent),
+      httpsAgent: expect.any(https.Agent),
     });
   });
 

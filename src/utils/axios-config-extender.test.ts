@@ -13,7 +13,7 @@ describe('axiosConfigExtender', () => {
     const result = axiosConfigExtender(mockConfig);
     expect(result).toMatchObject({
       ...mockConfig,
-      httpAgent: expect.any(https.Agent),
+      httpsAgent: expect.any(https.Agent),
     });
   });
 
