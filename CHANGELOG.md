@@ -1,5 +1,19 @@
 
 
+# [0.6.0-beta.5](https://github.com/Makvagabo/updatorio/compare/v0.6.0-beta.4...v0.6.0-beta.5) (2023-03-27)
+
+
+### Bug Fixes
+
+* **download-mods:** change name of the token param ([32d3a50](https://github.com/Makvagabo/updatorio/commit/32d3a504c257b51fb5401c4c17d9be9f51d952f0))
+* **download-mods:** update test ([a619c08](https://github.com/Makvagabo/updatorio/commit/a619c0895655dd0c2835835359109eddb1bc9d0c))
+
+
+### Features
+
+* **package:** delete redundant script ([9b1ffe7](https://github.com/Makvagabo/updatorio/commit/9b1ffe791f428363d2a76eba81a55d1a9f8be838))
+* **readme:** update todo list ([28a92b6](https://github.com/Makvagabo/updatorio/commit/28a92b6b1c6354e303019403b1d6b75902952dd9))
+
 # [0.6.0-beta.4](https://github.com/Makvagabo/updatorio/compare/v0.6.0-beta.3...v0.6.0-beta.4) (2023-03-27)
 
 
