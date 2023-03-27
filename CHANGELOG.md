@@ -1,5 +1,13 @@
 
 
+# [0.6.0-beta.7](https://github.com/Makvagabo/updatorio/compare/v0.6.0-beta.6...v0.6.0-beta.7) (2023-03-27)
+
+
+### Bug Fixes
+
+* **axios-config-extender:** change agent to https ([d5244aa](https://github.com/Makvagabo/updatorio/commit/d5244aa5f086932202128bfb98eed1ee69361c54))
+* continue throw exception in get-available-mods-for-update and get-auth-token ([2608c18](https://github.com/Makvagabo/updatorio/commit/2608c18bf06f6db8e430b33d43505b92853e5bc0))
+
 # [0.6.0-beta.6](https://github.com/Makvagabo/updatorio/compare/v0.6.0-beta.5...v0.6.0-beta.6) (2023-03-27)
 
 
