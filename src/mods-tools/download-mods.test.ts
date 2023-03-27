@@ -54,7 +54,7 @@ describe('downloadMods', () => {
         baseURL: options.downloadModsUrl,
         method: 'GET',
         url: modsAvailableForUpdate[0].availableVersionForUpdate.download_url,
-        params: { username: options.username, authToken },
+        params: { username: options.username, token: authToken },
       },
       path.join(
         MODS_DIR_PATH,
@@ -66,7 +66,7 @@ describe('downloadMods', () => {
         baseURL: options.downloadModsUrl,
         method: 'GET',
         url: modsAvailableForUpdate[1].availableVersionForUpdate.download_url,
-        params: { username: options.username, authToken },
+        params: { username: options.username, token: authToken },
       },
       path.join(
         MODS_DIR_PATH,
@@ -107,7 +107,7 @@ describe('downloadMods', () => {
         baseURL: options.downloadModsUrl,
         method: 'GET',
         url: modsAvailableForUpdate[0].availableVersionForUpdate.download_url,
-        params: { username: options.username, authToken },
+        params: { username: options.username, token: authToken },
       },
       path.join(
         MODS_DIR_PATH,
