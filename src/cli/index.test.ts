@@ -27,6 +27,7 @@ describe('cli', () => {
 
     expect(getOptions()).toStrictEqual({
       modsUrl: 'https://mods.factorio.com/api/mods',
+      downloadModsUrl: 'https://mods.factorio.com',
       authUrl: 'https://auth.factorio.com/api-login',
       semiVersions: 'minor',
       serverDir: './',
@@ -63,6 +64,7 @@ describe('cli', () => {
 
     expect(options).toStrictEqual({
       modsUrl: 'https://mods.factorio.com/api/mods',
+      downloadModsUrl: 'https://mods.factorio.com',
       authUrl: 'https://auth.factorio.com/api-login',
       semiVersions: 'minor',
       serverDir: './',
@@ -77,6 +79,7 @@ describe('cli', () => {
 
     expect(options).toStrictEqual({
       modsUrl: 'https://mods.factorio.com/api/mods',
+      downloadModsUrl: 'https://mods.factorio.com',
       authUrl: 'https://auth.factorio.com/api-login',
       semiVersions: 'minor',
       serverDir: './',
