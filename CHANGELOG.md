@@ -1,5 +1,12 @@
 
 
+# [1.0.0](https://github.com/Makvagabo/updatorio/compare/v0.6.0-beta.7...v1.0.0) (2023-04-01)
+
+
+### Features
+
+* add new features ([5178be8](https://github.com/Makvagabo/updatorio/commit/5178be805c691a87f99cafda44a3b5ce2fcdb371))
+
 # [0.6.0-beta.7](https://github.com/Makvagabo/updatorio/compare/v0.6.0-beta.6...v0.6.0-beta.7) (2023-03-27)
 
 
