@@ -13,4 +13,4 @@ junit.xml
 ./repos/*
 .env
 .npmrc
-/__test-env__
+credentials.json

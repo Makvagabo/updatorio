@@ -2,7 +2,11 @@ import fs from 'fs';
 import path from 'path';
 
 import { AvailableModsForUpdate, Options, ParsedModList } from '../types';
-import { MOD_EXTENSION, MOD_VERSION_SEPARATOR } from '../constants';
+import {
+  MOD_EXTENSION,
+  MOD_VERSION_SEPARATOR,
+  MODS_DIR_PATH,
+} from '../constants';
 
 export const removeMods = (
   currentModsList: ParsedModList,
@@ -20,7 +24,7 @@ export const removeMods = (
       fs.rmSync(
         path.join(
           options.serverDir,
-          `mods`,
+          MODS_DIR_PATH,
           `${name}${MOD_VERSION_SEPARATOR}${version}${MOD_EXTENSION}`
         )
       );

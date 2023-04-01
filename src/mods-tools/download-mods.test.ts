@@ -21,7 +21,7 @@ describe('downloadMods', () => {
         name: 'mod1',
         availableVersionForUpdate: {
           download_url: 'http://example.com/mod1.zip',
-          file_name: 'mod1.zip',
+          file_name: 'mod1_1.1.0.zip',
           info_json: { factorio_version: '1.0' },
           released_at: '2022-03-15T12:00:00Z',
           version: '1.1.0',
@@ -32,7 +32,7 @@ describe('downloadMods', () => {
         name: 'mod2',
         availableVersionForUpdate: {
           download_url: 'http://example.com/mod2.zip',
-          file_name: 'mod2.zip',
+          file_name: 'mod2_2.0.0.zip',
           info_json: { factorio_version: '1.1' },
           released_at: '2022-03-16T12:00:00Z',
           version: '2.0.0',
@@ -43,6 +43,7 @@ describe('downloadMods', () => {
     const options = {
       downloadModsUrl: 'http://example.com/download',
       username: 'user',
+      serverDir: './server',
     };
     const authToken = '1234';
 
@@ -56,10 +57,7 @@ describe('downloadMods', () => {
         url: modsAvailableForUpdate[0].availableVersionForUpdate.download_url,
         params: { username: options.username, token: authToken },
       },
-      path.join(
-        MODS_DIR_PATH,
-        `${modsAvailableForUpdate[0].availableVersionForUpdate.file_name}`
-      )
+      'server/mods/mod1_1.1.0.zip',
     );
     expect(mockDownloadFile).toHaveBeenCalledWith(
       {
@@ -68,10 +66,7 @@ describe('downloadMods', () => {
         url: modsAvailableForUpdate[1].availableVersionForUpdate.download_url,
         params: { username: options.username, token: authToken },
       },
-      path.join(
-        MODS_DIR_PATH,
-        `${modsAvailableForUpdate[1].availableVersionForUpdate.file_name}`
-      )
+      'server/mods/mod2_2.0.0.zip',
     );
   });
 
@@ -82,7 +77,7 @@ describe('downloadMods', () => {
         name: 'mod1',
         availableVersionForUpdate: {
           download_url: 'http://example.com/mod1.zip',
-          file_name: 'mod1.zip',
+          file_name: 'mod1_1.1.0.zip',
           info_json: { factorio_version: '1.0' },
           released_at: '2022-03-15T12:00:00Z',
           version: '1.1.0',
@@ -93,6 +88,7 @@ describe('downloadMods', () => {
     const options = {
       downloadModsUrl: 'http://example.com/download',
       username: 'user',
+      serverDir: './server',
     };
     const authToken = '1234';
     const mockError = new Error('Download error');
@@ -109,10 +105,7 @@ describe('downloadMods', () => {
         url: modsAvailableForUpdate[0].availableVersionForUpdate.download_url,
         params: { username: options.username, token: authToken },
       },
-      path.join(
-        MODS_DIR_PATH,
-        `${modsAvailableForUpdate[0].availableVersionForUpdate.file_name}`
-      )
+      'server/mods/mod1_1.1.0.zip',
     );
     expect(consoleErrorSpy).toHaveBeenCalledWith(
       'Download mods error!',

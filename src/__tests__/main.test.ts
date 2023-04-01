@@ -6,6 +6,7 @@ import {
   getCurrentModsList,
   getModsFiles,
   makeBackup,
+  parseModsFiles,
   removeMods,
 } from '../mods-tools';
 import { main } from '../main';
@@ -14,6 +15,7 @@ import {
   mockAvailableModsForUpdate,
   mockCurrentModsList,
   mockModsFiles,
+  mockParsedModsFiles,
   mockOptions,
 } from '../__mocks__/main';
 
@@ -24,6 +26,7 @@ jest.mock('../mods-tools', () => ({
   makeBackup: jest.fn(async () => true),
   downloadMods: jest.fn(async () => {}),
   removeMods: jest.fn(),
+  parseModsFiles: jest.fn(() => mockParsedModsFiles),
 }));
 
 jest.mock('../config', () => ({
@@ -57,10 +60,13 @@ describe('index', () => {
     expect(getModsFiles).toHaveBeenCalledTimes(1);
     expect(getModsFiles).toHaveBeenCalledWith(mockOptions.serverDir);
 
+    expect(parseModsFiles).toHaveBeenCalledTimes(1);
+    expect(parseModsFiles).toHaveBeenCalledWith(mockModsFiles);
+
     expect(getCurrentModsList).toHaveBeenCalledTimes(1);
     expect(getCurrentModsList).toHaveBeenCalledWith(
       mockOptions.serverDir,
-      mockModsFiles
+      mockParsedModsFiles,
     );
 
     expect(getAvailableModsForUpdate).toHaveBeenCalledTimes(1);

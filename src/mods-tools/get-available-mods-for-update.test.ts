@@ -39,6 +39,7 @@ describe('getModsAvailableForUpdate', () => {
       method: 'GET',
       url: 'https://mods.com',
       params: {
+        page_size: 'max',
         namelist: 'aai-containers,aai-industry,aai-signal-transmission',
       },
       httpsAgent: expect.any(https.Agent),

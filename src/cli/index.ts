@@ -44,7 +44,7 @@ export const run = (argv?: readonly string[], options?: ParseOptions) => {
       'mods semi version for updating',
       defaultOptions.semiVersions
     )
-    .option('--server-dir', 'root server directory', defaultOptions.serverDir)
+    .option('--server-dir <value>', 'root server directory', defaultOptions.serverDir)
     .requiredOption(
       '--username <value>',
       `your username of the ${config.gameServiceAddress} profile`

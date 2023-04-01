@@ -5,7 +5,8 @@ import {
   getCurrentModsList,
   getModsFiles,
   makeBackup,
-  removeMods,
+  parseModsFiles,
+  removeMods
 } from './mods-tools';
 import { getAuthToken } from './utils/get-auth-token';
 
@@ -13,8 +14,9 @@ export async function main() {
   const options = getOptions();
 
   const modsFiles = getModsFiles(options.serverDir);
+  const parsedModsFiles = parseModsFiles(modsFiles);
 
-  const currentModsList = getCurrentModsList(options.serverDir, modsFiles);
+  const currentModsList = getCurrentModsList(options.serverDir, parsedModsFiles);
 
   const modsAvailableForUpdate = await getAvailableModsForUpdate(
     options,

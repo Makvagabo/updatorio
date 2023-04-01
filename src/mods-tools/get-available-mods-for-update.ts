@@ -21,6 +21,7 @@ export const getAvailableModsForUpdate = async (
         url: options.modsUrl,
         method: 'GET',
         params: {
+          page_size: 'max',
           namelist: currentModsList.map((mod) => mod.name).join(','),
         },
       })
@@ -54,11 +55,13 @@ export const getAvailableModsForUpdate = async (
               options.gameVersion,
               `^${release.info_json?.factorio_version}`
             );
+
             const isNewVersionMod = compare(
               release.version,
               installedMod.version,
               '>'
             );
+
             const isNeedMod = Boolean(satisfiesModsVersionCondition)
               ? satisfies(
                   release.version,

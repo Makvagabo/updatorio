@@ -10,7 +10,7 @@ import { AvailableModsForUpdate, ProgramOptions } from '../types';
  */
 export const downloadMods = async (
   modsAvailableForUpdate: AvailableModsForUpdate,
-  options: Pick<ProgramOptions, 'downloadModsUrl' | 'username'>,
+  options: Pick<ProgramOptions, 'downloadModsUrl' | 'username' | 'serverDir'>,
   authToken: string
 ) => {
   const downloads = modsAvailableForUpdate.map((mod) => {
@@ -25,7 +25,7 @@ export const downloadMods = async (
         url: download_url,
         params: { username: options.username, token: authToken },
       },
-      path.join(MODS_DIR_PATH, `${file_name}`)
+      path.join(options.serverDir, MODS_DIR_PATH, `${file_name}`)
     );
   });
 

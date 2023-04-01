@@ -13,6 +13,7 @@ export async function downloadFile(
 
     return Promise.resolve();
   }
+
   const writer = fs.createWriteStream(outputLocationPath);
 
   const response = await axios(

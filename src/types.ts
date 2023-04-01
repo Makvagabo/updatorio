@@ -29,6 +29,11 @@ export type ModList = {
   }>;
 };
 
+export type ParsedModFiles = Array<{
+  name: string;
+  version: string;
+}>;
+
 export type ParsedModList = Array<{
   name: string;
   version: string;

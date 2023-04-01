@@ -1,0 +1,18 @@
+{
+  "mods": [
+    {
+      "name": "base",
+      "enabled": true
+    },
+
+    {
+      "name": "flib",
+      "enabled": true
+    },
+
+    {
+      "name": "space-exploration",
+      "enabled": true
+    }
+  ]
+}

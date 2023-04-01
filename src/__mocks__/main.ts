@@ -8,15 +8,31 @@ export const mockOptions = {
   username: 'user',
   password: '1234'
 };
-export const mockModsFiles = ['mod1.zip', 'mod2.zip'];
-export const mockCurrentModsList = [
+export const mockModsFiles = ['mod1_1.0.0.zip', 'mod2_2.0.0.zip', 'mod3.zip'];
+
+export const mockParsedModsFiles = [
   {
     name: 'mod1',
-    version: '1'
+    version: '1.0.0'
   },
   {
     name: 'mod2',
-    version: '1'
+    version: '2.0.0'
+  },
+  {
+    name: 'mod3',
+    version: 'invalid'
+  }
+];
+
+export const mockCurrentModsList = [
+  {
+    name: 'mod1',
+    version: '1.0.0'
+  },
+  {
+    name: 'mod2',
+    version: '2.0.0'
   }
 ];
 export const mockAvailableModsForUpdate = [{
