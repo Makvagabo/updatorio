@@ -1,5 +1,12 @@
 
 
+## [1.0.1](https://github.com/Makvagabo/updatorio/compare/v1.0.0...v1.0.1) (2023-04-01)
+
+
+### Bug Fixes
+
+* **readme:** fix mistakes ([e5b38fa](https://github.com/Makvagabo/updatorio/commit/e5b38faafa8028b7b89846c5d4f51d6dab83848f))
+
 # [1.0.0](https://github.com/Makvagabo/updatorio/compare/v0.6.0-beta.7...v1.0.0) (2023-04-01)
 
 
