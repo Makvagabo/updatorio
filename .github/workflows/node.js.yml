@@ -3,6 +3,11 @@ on: [push]
 jobs:
   bump:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [ 14.x ]
+
     steps:
     # Necessary to push the generated badges to the repo
     - name: Check out repository code
