@@ -1,6 +1,7 @@
+import fs from 'fs';
+
 import { initConfig, getConfig } from './index';
 import { DEFAULT_OPTIONS } from '../constants';
-import fs from 'fs';
 
 describe('config', () => {
   afterEach(() => {
@@ -20,7 +21,7 @@ describe('config', () => {
       gameServiceAddress: 'gs.com',
       defaultOptions: {
         ...DEFAULT_OPTIONS,
-        serverDir: `${__dirname}/__mocks__`,
+        serverDir: `src/config/__mocks__`,
       },
     });
 
@@ -29,7 +30,7 @@ describe('config', () => {
         modsUrl: 'https://mods.factorio.com/api/mods',
         authUrl: 'https://auth.factorio.com/api-login',
         semiVersions: 'minor',
-        serverDir: '/home/makvagabo/projects/updatorio/src/config/__mocks__',
+        serverDir: 'src/config/__mocks__',
         gameVersion: '1.1.76',
         downloadModsUrl: 'https://mods.factorio.com',
       },

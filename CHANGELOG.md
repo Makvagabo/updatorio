@@ -2,8 +2,10 @@
 
 ## [1.0.2](https://github.com/Makvagabo/updatorio/compare/v1.0.1...v1.0.2) (2023-04-02)
 
+### Documentation
+
 * **doc:** add template for coverage badge ([76eb1ec](https://github.com/Makvagabo/updatorio/commit/76eb1ec026f658523bf12b3fb86ee86af0dae8cf))
-* * **doc:** update package.json and README.md ([a8ffa70](https://github.com/Makvagabo/updatorio/commit/a8ffa709522326f8ec62544665fa884f8856eff4))
+* **doc:** update package.json and README.md ([a8ffa70](https://github.com/Makvagabo/updatorio/commit/a8ffa709522326f8ec62544665fa884f8856eff4))
 
 ## [1.0.1](https://github.com/Makvagabo/updatorio/compare/v1.0.0...v1.0.1) (2023-04-01)
 
