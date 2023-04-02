@@ -1,5 +1,25 @@
 
 
+### [1.0.3](https://github.com/Makvagabo/updatorio/compare/v1.0.2...v1.0.3) (2023-04-02)
+
+
+### Bug Fixes
+
+* **config:** update test ([e41e53e](https://github.com/Makvagabo/updatorio/commit/e41e53e8a9cbb66a1f906c5a5af939b04297e0dc))
+* **github-workflow:** update ([3aeac60](https://github.com/Makvagabo/updatorio/commit/3aeac6040e2b83e8769dfb5134c8eefcb1ac0fa3))
+* sort imports ([38f3ff7](https://github.com/Makvagabo/updatorio/commit/38f3ff7b91bc8616b0051c9bd96bcd15e02878c8))
+* **workflows:** add token ([461277a](https://github.com/Makvagabo/updatorio/commit/461277a91fc3f646478401f80fe614c28cd6c873))
+* **workflows:** node version ([f8b371b](https://github.com/Makvagabo/updatorio/commit/f8b371b38a33dc36b0c3a0c8ebe1be97e01b8656))
+* **workflows:** set commit message for badge generator ([db49d7e](https://github.com/Makvagabo/updatorio/commit/db49d7eafca1fe7c628bdda2524746271a0b0ce5))
+* **workflows:** set node version ([9c74c4f](https://github.com/Makvagabo/updatorio/commit/9c74c4f99ca1b1966fe0cbf606d344f8911f4bc5))
+* **workflows:** update ([f80ce23](https://github.com/Makvagabo/updatorio/commit/f80ce23f18c53beca496f8d31e0f73121242495f))
+* **workflows:** update ci script ([26d3b05](https://github.com/Makvagabo/updatorio/commit/26d3b056932de37726bcb143e65189f2160c0a2b))
+
+
+### Documentation
+
+* update CHANGELOG.md and setting of conventional-changelog ([ee74cf9](https://github.com/Makvagabo/updatorio/commit/ee74cf97d61ba47318b7bd8c1cad2c1422df2258))
+
 ## [1.0.2](https://github.com/Makvagabo/updatorio/compare/v1.0.1...v1.0.2) (2023-04-02)
 
 ### Documentation
