@@ -1,8 +1,8 @@
 # Updatorio
 
-CLI tool for updating Factorio mods on the dedicated linux server.
+CLI tool for updating Factorio mods on the dedicated server.
 
-> 📒 Be attention! This program could corrupt your game's files. Don't forget to make a backup.
+> 📒 Be attention! This program could corrupt your game files. Don't forget to make a backup.
 > 
 > I added one of the possible values of parameter `--semi-versions` - `beta`, because the most mods are in beta state. It allows to update mods with 0.x.x version. But it doesn't guarantee that all be work good.
 

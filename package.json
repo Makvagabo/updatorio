@@ -1,15 +1,26 @@
 {
   "name": "updatorio",
   "version": "1.0.1",
-  "description": "It updates all your mods on the dedicated factorio game server.",
+  "description": "CLI tool for updating Factorio mods on the dedicated server.",
   "main": "src/index.ts",
   "bin": "./index.js",
-  "license": "MIT",
   "scripts": {
     "start": "NODE_ENV=development ts-node src/start.ts",
     "build": "NODE_ENV=production node esbuild.mjs",
     "test": "jest --collect-coverage --detectOpenHandles",
+    "release:major": "release-it --ci major",
+    "release:minor": "release-it --ci minor",
     "release:beta": "release-it --ci minor --preRelease=beta"
+  },
+  "keywords": [
+    "factorio",
+    "update",
+    "mods"
+  ],
+  "author": "Aleksandr Petropavlovskikh",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Makvagabo/updatorio/issues"
   },
   "repository": {
     "type": "git",
