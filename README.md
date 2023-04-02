@@ -12,7 +12,7 @@ CLI tool for updating Factorio mods on the dedicated server.
 
 1. Installing
     ```
-    yarn global add updatorio@beta
+    yarn global add updatorio@latest
     ```
 1. Run
     ```
