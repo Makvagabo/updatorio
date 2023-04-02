@@ -24,4 +24,5 @@ jobs:
     - name: Generating coverage badges
       uses: jpb06/jest-badges-action@latest
       with:
+        github_token: ${{ secrets.COVERAGE_BADGES }}
         branches: master
