@@ -1,6 +1,6 @@
 {
   "name": "updatorio",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "CLI tool for updating Factorio mods on the dedicated server.",
   "main": "src/index.ts",
   "bin": "./index.js",
