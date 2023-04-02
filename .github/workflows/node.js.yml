@@ -4,11 +4,11 @@ jobs:
   bump:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [ 14.x ]
-
     steps:
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 14
+
     # Necessary to push the generated badges to the repo
     - name: Check out repository code
       uses: actions/checkout@v2
