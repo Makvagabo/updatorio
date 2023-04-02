@@ -1,5 +1,7 @@
 # Updatorio
 
+![Jest coverage](./badges/coverage-jest%20coverage.svg)
+
 CLI tool for updating Factorio mods on the dedicated server.
 
 > 📒 Be attention! This program could corrupt your game files. Don't forget to make a backup.

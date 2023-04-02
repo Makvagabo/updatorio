@@ -7,9 +7,10 @@
   "scripts": {
     "start": "NODE_ENV=development ts-node src/start.ts",
     "build": "NODE_ENV=production node esbuild.mjs",
-    "test": "jest --collect-coverage --detectOpenHandles",
+    "test-ci": "jest --ci --detectOpenHandles",
     "release:major": "release-it --ci major",
     "release:minor": "release-it --ci minor",
+    "release:patch": "release-it --ci patch",
     "release:beta": "release-it --ci minor --preRelease=beta"
   },
   "keywords": [
@@ -60,7 +61,9 @@
     ],
     "transform": {
       "^.+\\.ts$": "ts-jest"
-    }
+    },
+    "coverageReporters": ["json-summary"],
+    "collectCoverage": true
   },
   "release-it": {
     "npm": {
@@ -79,7 +82,7 @@
     },
     "hooks": {
       "before:release": [
-        "yarn test",
+        "yarn test-ci",
         "yarn build"
       ]
     },
