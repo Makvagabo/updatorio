@@ -1,6 +1,6 @@
 {
   "name": "updatorio",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "CLI tool for updating Factorio mods on the dedicated server.",
   "main": "src/index.ts",
   "bin": "./index.js",
@@ -62,7 +62,9 @@
     "transform": {
       "^.+\\.ts$": "ts-jest"
     },
-    "coverageReporters": ["json-summary"],
+    "coverageReporters": [
+      "json-summary"
+    ],
     "collectCoverage": true
   },
   "release-it": {
