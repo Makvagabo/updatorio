@@ -1,8 +1,5 @@
-import path from 'path';
-
 import { downloadFile } from '../utils/download-file';
 import { downloadMods } from './download-mods';
-import { MODS_DIR_PATH } from '../constants';
 
 jest.mock('../utils/download-file');
 
