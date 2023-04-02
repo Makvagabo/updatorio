@@ -1,8 +1,8 @@
 import fs from 'fs';
 import axios from 'axios';
+import https from 'https';
 
 import { downloadFile } from './download-file';
-import https from 'https';
 
 jest.mock('axios');
 

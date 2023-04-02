@@ -1,6 +1,7 @@
 import axios from 'axios';
-import { getAuthToken } from './get-auth-token';
 import https from 'https';
+
+import { getAuthToken } from './get-auth-token';
 
 jest.mock('axios');
 

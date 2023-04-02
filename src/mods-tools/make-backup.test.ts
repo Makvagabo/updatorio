@@ -1,5 +1,4 @@
 import fs from 'fs';
-import path from 'path';
 import JSZip from 'jszip';
 
 import { makeBackup } from './make-backup';
