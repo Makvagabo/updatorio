@@ -27,11 +27,11 @@ export async function main() {
     return 'No available mods for update!';
   }
 
+  const authToken = await getAuthToken(options);
+
   await makeBackup(modsFiles, options);
 
   removeMods(currentModsList, modsAvailableForUpdate, options);
-
-  const authToken = await getAuthToken(options);
 
   await downloadMods(modsAvailableForUpdate, options, authToken);
 }
