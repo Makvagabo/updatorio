@@ -8,7 +8,7 @@ import {
   parseModsFiles,
   removeMods
 } from './mods-tools';
-import { getAuthToken } from './utils/get-auth-token';
+import { getAuthToken } from './utils';
 
 export async function main() {
   const options = getOptions();
