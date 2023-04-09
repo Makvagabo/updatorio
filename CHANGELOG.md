@@ -1,5 +1,17 @@
 
 
+### [1.0.5](https://github.com/Makvagabo/updatorio/compare/v1.0.4...v1.0.5) (2023-04-09)
+
+
+### Features
+
+* create index file for utils, refactor test for main function ([f75a100](https://github.com/Makvagabo/updatorio/commit/f75a100be054b1d607eaa9db0202176aa59fc6eb))
+
+
+### Bug Fixes
+
+* **main:** change sequence actions ([24019df](https://github.com/Makvagabo/updatorio/commit/24019df91d8a15eb386a2485f0f1c22aae6d2fed))
+
 ### [1.0.4](https://github.com/Makvagabo/updatorio/compare/v1.0.2...v1.0.4) (2023-04-02)
 
 
