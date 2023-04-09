@@ -1,5 +1,5 @@
 import { getOptions } from '../cli';
-import { getAuthToken } from '../utils/get-auth-token';
+import { getAuthToken } from '../utils';
 import {
   downloadMods,
   getAvailableModsForUpdate,
@@ -10,6 +10,7 @@ import {
   removeMods,
 } from '../mods-tools';
 import { main } from '../main';
+
 import {
   mockAuthToken,
   mockAvailableModsForUpdate,
@@ -41,7 +42,7 @@ jest.mock('../utils/get-auth-token', () => ({
   getAuthToken: jest.fn(async () => mockAuthToken),
 }));
 
-describe('index', () => {
+describe('main', () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
@@ -76,16 +77,16 @@ describe('index', () => {
     );
     await new Promise((res) => setTimeout(() => res(true), 0));
 
+    expect(getAuthToken).toHaveBeenCalledTimes(1);
+    expect(getAuthToken).toHaveBeenCalledWith(mockOptions);
+    await new Promise((res) => setTimeout(() => res(true), 0));
+
     expect(makeBackup).toHaveBeenCalledTimes(1);
     expect(makeBackup).toHaveBeenCalledWith(mockModsFiles, mockOptions);
     await new Promise((res) => setTimeout(() => res(true), 0));
 
     expect(removeMods).toHaveBeenCalledTimes(1);
     expect(removeMods).toHaveBeenCalledWith(mockCurrentModsList, mockAvailableModsForUpdate, mockOptions);
-
-    expect(getAuthToken).toHaveBeenCalledTimes(1);
-    expect(getAuthToken).toHaveBeenCalledWith(mockOptions);
-    await new Promise((res) => setTimeout(() => res(true), 0));
 
     expect(downloadMods).toHaveBeenCalledTimes(1);
     expect(downloadMods).toHaveBeenCalledWith(
@@ -98,18 +99,38 @@ describe('index', () => {
   it('should not make a backup if have no available mods for update', async () => {
     jest.spyOn(console, 'log').mockImplementation();
     (
-      getAvailableModsForUpdate as jest.MockedFunction<any>
+      getAvailableModsForUpdate as jest.MockedFunction<typeof getAvailableModsForUpdate>
     ).mockResolvedValueOnce([]);
 
     await main();
 
     await new Promise((res) => setTimeout(() => res(true), 0));
 
+    expect(getAuthToken).toHaveBeenCalledTimes(0);
+
     expect(makeBackup).toHaveBeenCalledTimes(0);
 
     expect(removeMods).toHaveBeenCalledTimes(0);
 
-    expect(getAuthToken).toHaveBeenCalledTimes(0);
+    expect(downloadMods).toHaveBeenCalledTimes(0);
+  });
+
+  it('should not make a backup if auth token request was rejected', async () => {
+    const error = Error('Invalid Parameters');
+    jest.spyOn(console, 'log').mockImplementation();
+    (
+      getAuthToken as jest.MockedFunction<typeof getAuthToken>
+    ).mockRejectedValueOnce(error) ;
+
+    await expect(main()).rejects.toThrow(error);
+
+    await new Promise((res) => setTimeout(() => res(true), 0));
+
+    expect(getAuthToken).toHaveBeenCalledTimes(1);
+
+    expect(makeBackup).toHaveBeenCalledTimes(0);
+
+    expect(removeMods).toHaveBeenCalledTimes(0);
 
     expect(downloadMods).toHaveBeenCalledTimes(0);
   });

@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 
 import { MOD_EXTENSION, MODS_DIR_PATH } from '../constants';
-import { getUniquePostfix } from '../utils/get-unique-postfix';
+import { getUniquePostfix } from '../utils';
 import { ProgramOptions } from '../types';
 
 export const makeBackup = (

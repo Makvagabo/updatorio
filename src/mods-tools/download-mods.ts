@@ -1,6 +1,6 @@
 import path from 'path';
 
-import { downloadFile } from '../utils/download-file';
+import { downloadFile } from '../utils';
 import { MODS_DIR_PATH } from '../constants';
 import { AvailableModsForUpdate, ProgramOptions } from '../types';
 

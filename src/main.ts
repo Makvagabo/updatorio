@@ -8,7 +8,7 @@ import {
   parseModsFiles,
   removeMods
 } from './mods-tools';
-import { getAuthToken } from './utils/get-auth-token';
+import { getAuthToken } from './utils';
 
 export async function main() {
   const options = getOptions();
@@ -27,11 +27,11 @@ export async function main() {
     return 'No available mods for update!';
   }
 
+  const authToken = await getAuthToken(options);
+
   await makeBackup(modsFiles, options);
 
   removeMods(currentModsList, modsAvailableForUpdate, options);
-
-  const authToken = await getAuthToken(options);
 
   await downloadMods(modsAvailableForUpdate, options, authToken);
 }

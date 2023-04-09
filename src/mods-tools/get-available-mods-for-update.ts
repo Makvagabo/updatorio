@@ -7,9 +7,7 @@ import {
   ParsedModList,
   ProgramOptions,
 } from '../types';
-import { getSatisfiesModsVersionCondition } from '../utils/get-satisfies-mods-version-condition';
-import { modifySatisfiesModsVersionCondition } from '../utils/modify-satisfies-mods-version-conditio';
-import { axiosConfigExtender } from '../utils/axios-config-extender';
+import { getSatisfiesModsVersionCondition, modifySatisfiesModsVersionCondition, axiosConfigExtender } from '../utils';
 
 export const getAvailableModsForUpdate = async (
   options: Pick<ProgramOptions, 'modsUrl' | 'semiVersions' | 'gameVersion'>,
