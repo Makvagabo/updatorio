@@ -22,7 +22,8 @@ run([
   '--username', username,
   '--password', password,
   '--semi-versions', 'beta',
-  '--server-dir', './__test-env__'
+  '--server-dir', './__test-env__',
+  '-i',
 ]);
 
 main()

@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-import { AvailableModsForUpdate, Options, ParsedModList } from '../types';
+import { ModsForUpdate, Options, ParsedModList } from '../types';
 import { removeMods } from './remove-mods';
 
 jest.mock('fs');
@@ -10,7 +10,7 @@ describe('removeMods', () => {
   const mod1 = { name: 'mod1', version: '1.0.0' };
   const mod2 = { name: 'mod2', version: '2.0.0' };
   const mod3 = { name: 'mod3', version: '3.0.0' };
-  const modsAvailableForUpdate = [mod1, mod2] as never as AvailableModsForUpdate;
+  const modsAvailableForUpdate = [mod1, mod2] as never as ModsForUpdate;
 
   const options: Pick<Options, 'serverDir'> = {
     serverDir: '/test/server/dir',

@@ -12,4 +12,5 @@ export const DEFAULT_OPTIONS: Options = {
   authUrl: 'https://auth.factorio.com/api-login',
   semiVersions: 'minor',
   serverDir: './',
+  interactive: false,
 };

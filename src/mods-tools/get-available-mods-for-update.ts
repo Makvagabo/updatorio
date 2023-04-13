@@ -2,7 +2,7 @@ import axios from 'axios';
 import { compare, compareVersions, satisfies } from 'compare-versions';
 
 import {
-  AvailableModsForUpdate,
+  ModsForUpdate,
   ModsReleasesInfoData,
   ParsedModList,
   ProgramOptions,
@@ -29,7 +29,7 @@ export const getAvailableModsForUpdate = async (
       options.semiVersions
     );
 
-    return modsReleasesInfo.data.results.reduce<AvailableModsForUpdate>(
+    return modsReleasesInfo.data.results.reduce<ModsForUpdate>(
       (acc, mod) => {
         const installedMod = currentModsList.find(
           (currentMod) => currentMod.name === mod.name

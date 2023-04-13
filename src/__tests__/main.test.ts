@@ -8,6 +8,7 @@ import {
   makeBackup,
   parseModsFiles,
   removeMods,
+  chooseModsForUpdate,
 } from '../mods-tools';
 import { main } from '../main';
 
@@ -18,6 +19,7 @@ import {
   mockModsFiles,
   mockParsedModsFiles,
   mockOptions,
+  mockModsForUpdate,
 } from '../__mocks__/main';
 
 jest.mock('../mods-tools', () => ({
@@ -28,6 +30,7 @@ jest.mock('../mods-tools', () => ({
   downloadMods: jest.fn(async () => {}),
   removeMods: jest.fn(),
   parseModsFiles: jest.fn(() => mockParsedModsFiles),
+  chooseModsForUpdate: jest.fn(async () => mockModsForUpdate),
 }));
 
 jest.mock('../config', () => ({
@@ -52,8 +55,6 @@ describe('main', () => {
   });
 
   it('should call and run all operations', async () => {
-    jest.spyOn(console, 'log').mockImplementation();
-
     await main();
 
     expect(getOptions).toHaveBeenCalledTimes(1);
@@ -67,7 +68,7 @@ describe('main', () => {
     expect(getCurrentModsList).toHaveBeenCalledTimes(1);
     expect(getCurrentModsList).toHaveBeenCalledWith(
       mockOptions.serverDir,
-      mockParsedModsFiles,
+      mockParsedModsFiles
     );
 
     expect(getAvailableModsForUpdate).toHaveBeenCalledTimes(1);
@@ -76,6 +77,8 @@ describe('main', () => {
       mockCurrentModsList
     );
     await new Promise((res) => setTimeout(() => res(true), 0));
+
+    expect(chooseModsForUpdate).not.toBeCalled();
 
     expect(getAuthToken).toHaveBeenCalledTimes(1);
     expect(getAuthToken).toHaveBeenCalledWith(mockOptions);
@@ -86,7 +89,11 @@ describe('main', () => {
     await new Promise((res) => setTimeout(() => res(true), 0));
 
     expect(removeMods).toHaveBeenCalledTimes(1);
-    expect(removeMods).toHaveBeenCalledWith(mockCurrentModsList, mockAvailableModsForUpdate, mockOptions);
+    expect(removeMods).toHaveBeenCalledWith(
+      mockCurrentModsList,
+      mockAvailableModsForUpdate,
+      mockOptions
+    );
 
     expect(downloadMods).toHaveBeenCalledTimes(1);
     expect(downloadMods).toHaveBeenCalledWith(
@@ -96,42 +103,90 @@ describe('main', () => {
     );
   });
 
-  it('should not make a backup if have no available mods for update', async () => {
-    jest.spyOn(console, 'log').mockImplementation();
-    (
-      getAvailableModsForUpdate as jest.MockedFunction<typeof getAvailableModsForUpdate>
-    ).mockResolvedValueOnce([]);
+  it('should the list of mods for update be different from available list if the interactive mode turned on', async () => {
+    const optionsWithInteractiveModOn = {
+      ...mockOptions,
+      interactive: true,
+    };
+    (getOptions as jest.MockedFn<typeof getOptions>).mockImplementation(
+      () => optionsWithInteractiveModOn
+    );
 
     await main();
 
+    expect(chooseModsForUpdate).toHaveBeenCalledTimes(1);
+    expect(chooseModsForUpdate).toHaveBeenCalledWith(
+      mockAvailableModsForUpdate,
+      mockCurrentModsList
+    );
     await new Promise((res) => setTimeout(() => res(true), 0));
 
-    expect(getAuthToken).toHaveBeenCalledTimes(0);
+    expect(removeMods).toHaveBeenCalledTimes(1);
+    expect(removeMods).toHaveBeenCalledWith(
+      mockCurrentModsList,
+      mockModsForUpdate,
+      optionsWithInteractiveModOn
+    );
 
-    expect(makeBackup).toHaveBeenCalledTimes(0);
-
-    expect(removeMods).toHaveBeenCalledTimes(0);
-
-    expect(downloadMods).toHaveBeenCalledTimes(0);
+    expect(downloadMods).toHaveBeenCalledTimes(1);
+    expect(downloadMods).toHaveBeenCalledWith(
+      mockModsForUpdate,
+      optionsWithInteractiveModOn,
+      mockAuthToken
+    );
   });
 
-  it('should not make a backup if auth token request was rejected', async () => {
-    const error = Error('Invalid Parameters');
-    jest.spyOn(console, 'log').mockImplementation();
-    (
-      getAuthToken as jest.MockedFunction<typeof getAuthToken>
-    ).mockRejectedValueOnce(error) ;
+  describe('should not make a backup and download', () => {
+    afterEach(() => {
+      expect(makeBackup).not.toBeCalled();
+      expect(removeMods).not.toBeCalled();
+      expect(downloadMods).not.toBeCalled();
+    });
 
-    await expect(main()).rejects.toThrow(error);
+    it('when have no available mods for update', async () => {
+      (
+        getAvailableModsForUpdate as jest.MockedFunction<
+          typeof getAvailableModsForUpdate
+        >
+      ).mockResolvedValueOnce([]);
 
-    await new Promise((res) => setTimeout(() => res(true), 0));
+      await main();
 
-    expect(getAuthToken).toHaveBeenCalledTimes(1);
+      await new Promise((res) => setTimeout(() => res(true), 0));
 
-    expect(makeBackup).toHaveBeenCalledTimes(0);
+      expect(getAuthToken).not.toBeCalled();
+    });
 
-    expect(removeMods).toHaveBeenCalledTimes(0);
+    it('when user has chose mods', async () => {
+      const optionsWithInteractiveModOn = {
+        ...mockOptions,
+        interactive: true,
+      };
+      (getOptions as jest.MockedFn<typeof getOptions>).mockImplementation(
+        () => optionsWithInteractiveModOn
+      );
+      (
+        chooseModsForUpdate as jest.MockedFunction<typeof chooseModsForUpdate>
+      ).mockResolvedValueOnce([]);
 
-    expect(downloadMods).toHaveBeenCalledTimes(0);
+      await main();
+
+      await new Promise((res) => setTimeout(() => res(true), 0));
+
+      expect(getAuthToken).not.toBeCalled();
+    });
+
+    it('when auth token request was rejected', async () => {
+      const error = Error('Invalid Parameters');
+      (
+        getAuthToken as jest.MockedFunction<typeof getAuthToken>
+      ).mockRejectedValueOnce(error);
+
+      await expect(main()).rejects.toThrow(error);
+
+      await new Promise((res) => setTimeout(() => res(true), 0));
+
+      expect(getAuthToken).toHaveBeenCalledTimes(1);
+    });
   });
 });

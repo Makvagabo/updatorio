@@ -5,6 +5,7 @@ export type Options = {
   authUrl: string;
   semiVersions: 'beta' | 'patch' | 'minor' | 'major';
   serverDir: string;
+  interactive: boolean
 };
 
 export type SatisfiesModsVersionCondition = '^' | '~' | '';
@@ -55,7 +56,7 @@ export type ModsReleasesInfoData = {
   }>;
 };
 
-export type AvailableModsForUpdate = Array<{
+export type ModsForUpdate = Array<{
   name: string;
   availableVersionForUpdate: ModsReleasesInfoData['results'][number]['releases'][number];
 }>;

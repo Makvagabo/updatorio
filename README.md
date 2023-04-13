@@ -5,7 +5,7 @@
 CLI tool for updating Factorio mods on the dedicated server.
 
 > 📒 Be attention! This program could corrupt your game files. Don't forget to make a backup.
-> 
+>
 > I added one of the possible values of parameter `--semi-versions` - `beta`, because the most mods are in beta state. It allows to update mods with 0.x.x version. But it doesn't guarantee that all be work good.
 
 ## How to use it?
@@ -38,9 +38,10 @@ If you want to support this project you could make a PR or donate:
 
 ## TODO
 - [x] Check what version picks from available list
-- [ ] Revert backup if an error occurs in the downloading mods process
-- [ ] Hide errors under the --verbose flag
 - [x] Create development environment (dev index file)
 - [x] Fix destination folder for backup (must be serverDir)
+- [x] Let to choose from command line what mods to update via [Inquirer](https://github.com/SBoudrias/Inquirer.js)
+- [ ] Revert backup if an error occurs in the downloading mods process
+- [ ] Hide errors under the --verbose flag
 - [ ] Look case when there are 2 versions of mod
-- [ ] Let to choose from command line what mods to update via [Inquirer](https://github.com/SBoudrias/Inquirer.js)
+- [ ] Migrate to 16 Nodejs and update github actions
