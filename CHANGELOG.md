@@ -1,5 +1,17 @@
 
 
+## [1.1.0](https://github.com/Makvagabo/updatorio/compare/v1.0.5...v1.1.0) (2023-04-13)
+
+
+### Features
+
+* add interactive mode for mods selecting ([bd0ea54](https://github.com/Makvagabo/updatorio/commit/bd0ea541037186f84cb55d47ec4f5b102ba7a3f5))
+
+
+### Documentation
+
+* update TODO list ([e0457cf](https://github.com/Makvagabo/updatorio/commit/e0457cf17931d6014cc02557c5f726235d22e2ec))
+
 ### [1.0.5](https://github.com/Makvagabo/updatorio/compare/v1.0.4...v1.0.5) (2023-04-09)
 
 
