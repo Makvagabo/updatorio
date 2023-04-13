@@ -5,3 +5,4 @@ export * from "./get-mods-files";
 export * from "./make-backup";
 export * from "./parse-mods-files";
 export * from "./remove-mods";
+export * from "./choose-mods-for-update";

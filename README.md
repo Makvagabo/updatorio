@@ -40,7 +40,8 @@ If you want to support this project you could make a PR or donate:
 - [x] Check what version picks from available list
 - [x] Create development environment (dev index file)
 - [x] Fix destination folder for backup (must be serverDir)
-- [ ] Let to choose from command line what mods to update via [Inquirer](https://github.com/SBoudrias/Inquirer.js)
+- [x] Let to choose from command line what mods to update via [Inquirer](https://github.com/SBoudrias/Inquirer.js)
 - [ ] Revert backup if an error occurs in the downloading mods process
 - [ ] Hide errors under the --verbose flag
 - [ ] Look case when there are 2 versions of mod
+- [ ] Migrate to 16 Nodejs and update github actions

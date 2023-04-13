@@ -44,6 +44,10 @@ export const run = (argv?: readonly string[], options?: ParseOptions) => {
       'mods semi version for updating',
       defaultOptions.semiVersions
     )
+    .option(
+      '-i, --interactive',
+      'the mode that is allowed you to select what mods you want to update',
+    )
     .option('--server-dir <value>', 'root server directory', defaultOptions.serverDir)
     .requiredOption(
       '--username <value>',

@@ -44,6 +44,7 @@ describe('main success', () => {
         authUrl: 'https://auth.factorio.com/api-login',
         semiVersions: 'minor',
         serverDir: './',
+        interactive: false,
       },
     });
 

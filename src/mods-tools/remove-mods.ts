@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-import { AvailableModsForUpdate, Options, ParsedModList } from '../types';
+import { ModsForUpdate, Options, ParsedModList } from '../types';
 import {
   MOD_EXTENSION,
   MOD_VERSION_SEPARATOR,
@@ -10,7 +10,7 @@ import {
 
 export const removeMods = (
   currentModsList: ParsedModList,
-  modsAvailableForUpdate: AvailableModsForUpdate,
+  modsAvailableForUpdate: ModsForUpdate,
   options: Pick<Options, 'serverDir'>
 ) => {
   currentModsList
