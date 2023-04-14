@@ -1,5 +1,12 @@
 
 
+### [1.1.1](https://github.com/Makvagabo/updatorio/compare/v1.1.0...v1.1.1) (2023-04-14)
+
+
+### Features
+
+* **options:** add no-backup option ([86f9348](https://github.com/Makvagabo/updatorio/commit/86f9348ec2f56248cc4daa201772b0e8d4f7d83b))
+
 ## [1.1.0](https://github.com/Makvagabo/updatorio/compare/v1.0.5...v1.1.0) (2023-04-13)
 
 
