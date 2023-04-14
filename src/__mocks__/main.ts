@@ -8,6 +8,7 @@ export const mockOptions = {
   username: 'user',
   password: '1234',
   interactive: false,
+  backup: true,
 };
 export const mockModsFiles = [
   'mod1_1.0.0.zip',

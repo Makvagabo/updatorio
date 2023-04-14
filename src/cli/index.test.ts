@@ -14,6 +14,7 @@ describe('cli', () => {
           serverDir: './',
           gameVersion: '1.0',
           interactive: false,
+          backup: true,
         } as Options,
       }),
     }));
@@ -44,6 +45,7 @@ describe('cli', () => {
       username: 'guest',
       password: 'qwerty',
       gameVersion: '1.0',
+      backup: true,
     });
   });
 
@@ -70,6 +72,35 @@ describe('cli', () => {
       password: 'qwerty',
       gameVersion: '1.0',
       interactive: true,
+      backup: true,
+    });
+  });
+
+  it('should have the backup option with value false', async () => {
+    const { run, getOptions } = await import('../cli');
+
+    run([
+      'node',
+      'factorio-mods-updater',
+      '--username',
+      'guest',
+      '--password',
+      'qwerty',
+      '--no-backup',
+      '-i',
+    ]);
+
+    expect(getOptions()).toStrictEqual({
+      modsUrl: 'https://mods.factorio.com/api/mods',
+      downloadModsUrl: 'https://mods.factorio.com',
+      authUrl: 'https://auth.factorio.com/api-login',
+      semiVersions: 'minor',
+      serverDir: './',
+      username: 'guest',
+      password: 'qwerty',
+      gameVersion: '1.0',
+      interactive: true,
+      backup: false,
     });
   });
 
@@ -120,6 +151,7 @@ describe('cli', () => {
       username: 'guest',
       password: 'qwerty',
       gameVersion: '2.0.0',
+      backup: true,
     });
 
     run([
@@ -144,6 +176,7 @@ describe('cli', () => {
       username: 'guest',
       password: 'qwerty',
       gameVersion: '1.0',
+      backup: true,
     });
   });
 });

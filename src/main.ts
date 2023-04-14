@@ -40,7 +40,9 @@ export async function main() {
 
   const authToken = await getAuthToken(options);
 
-  await makeBackup(modsFiles, options);
+  if (options.backup) {
+    await makeBackup(modsFiles, options);
+  }
 
   removeMods(currentModsList, modsForUpdate, options);
 

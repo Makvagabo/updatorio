@@ -13,4 +13,5 @@ export const DEFAULT_OPTIONS: Options = {
   semiVersions: 'minor',
   serverDir: './',
   interactive: false,
+  backup: true,
 };

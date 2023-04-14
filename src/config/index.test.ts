@@ -33,6 +33,7 @@ describe('config', () => {
         serverDir: 'src/config/__mocks__',
         gameVersion: '1.1.76',
         downloadModsUrl: 'https://mods.factorio.com',
+        backup: true,
         interactive: false,
       },
       gameServiceAddress: 'gs.com',

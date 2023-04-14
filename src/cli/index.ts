@@ -46,9 +46,17 @@ export const run = (argv?: readonly string[], options?: ParseOptions) => {
     )
     .option(
       '-i, --interactive',
-      'the mode that is allowed you to select what mods you want to update',
+      'the mode that is allowed you to select what mods you want to update'
     )
-    .option('--server-dir <value>', 'root server directory', defaultOptions.serverDir)
+    .option(
+      '--no-backup [boolean]',
+      'not to do a backup of all mods before update',
+    )
+    .option(
+      '--server-dir <value>',
+      'root server directory',
+      defaultOptions.serverDir
+    )
     .requiredOption(
       '--username <value>',
       `your username of the ${config.gameServiceAddress} profile`

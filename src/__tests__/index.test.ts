@@ -45,6 +45,7 @@ describe('main success', () => {
         semiVersions: 'minor',
         serverDir: './',
         interactive: false,
+        backup: true,
       },
     });
 

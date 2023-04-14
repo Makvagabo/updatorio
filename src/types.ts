@@ -6,6 +6,7 @@ export type Options = {
   semiVersions: 'beta' | 'patch' | 'minor' | 'major';
   serverDir: string;
   interactive: boolean
+  backup: boolean
 };
 
 export type SatisfiesModsVersionCondition = '^' | '~' | '';

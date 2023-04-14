@@ -136,6 +136,61 @@ describe('main', () => {
     );
   });
 
+  it('should not mak a backup by the option', async () => {
+    const optionsWithInteractiveModOn = {
+      ...mockOptions,
+      backup: false,
+    };
+    (getOptions as jest.MockedFn<typeof getOptions>).mockImplementation(
+      () => optionsWithInteractiveModOn
+    );
+
+    await main();
+
+    expect(getOptions).toHaveBeenCalledTimes(1);
+
+    expect(getModsFiles).toHaveBeenCalledTimes(1);
+    expect(getModsFiles).toHaveBeenCalledWith(optionsWithInteractiveModOn.serverDir);
+
+    expect(parseModsFiles).toHaveBeenCalledTimes(1);
+    expect(parseModsFiles).toHaveBeenCalledWith(mockModsFiles);
+
+    expect(getCurrentModsList).toHaveBeenCalledTimes(1);
+    expect(getCurrentModsList).toHaveBeenCalledWith(
+      optionsWithInteractiveModOn.serverDir,
+      mockParsedModsFiles
+    );
+
+    expect(getAvailableModsForUpdate).toHaveBeenCalledTimes(1);
+    expect(getAvailableModsForUpdate).toHaveBeenCalledWith(
+      optionsWithInteractiveModOn,
+      mockCurrentModsList
+    );
+    await new Promise((res) => setTimeout(() => res(true), 0));
+
+    expect(chooseModsForUpdate).not.toBeCalled();
+
+    expect(getAuthToken).toHaveBeenCalledTimes(1);
+    expect(getAuthToken).toHaveBeenCalledWith(optionsWithInteractiveModOn);
+    await new Promise((res) => setTimeout(() => res(true), 0));
+
+    expect(makeBackup).not.toBeCalled();
+
+    expect(removeMods).toHaveBeenCalledTimes(1);
+    expect(removeMods).toHaveBeenCalledWith(
+      mockCurrentModsList,
+      mockAvailableModsForUpdate,
+      optionsWithInteractiveModOn
+    );
+
+    expect(downloadMods).toHaveBeenCalledTimes(1);
+    expect(downloadMods).toHaveBeenCalledWith(
+      mockAvailableModsForUpdate,
+      optionsWithInteractiveModOn,
+      mockAuthToken
+    );
+  });
+
   describe('should not make a backup and download', () => {
     afterEach(() => {
       expect(makeBackup).not.toBeCalled();
